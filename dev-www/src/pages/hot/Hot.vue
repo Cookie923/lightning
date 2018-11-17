@@ -4,27 +4,71 @@
       <span class="iconfont">&#xe63c;</span>
         Lighting
     </header>
-    <el-carousel trigger="click" height="4rem">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <swiper :options="swiperOption">
+      <swiper-slide v-for="item of newsList" :key="item.id">
+        <img class="swiper-img" :src="item.imgUrl">
         <div class="news-title">
-          <h3>影讯标题{{ item }}</h3>
-          <span>小标题电影资讯内容概述</span>
+          <h3>{{item.newsTitle}}</h3>
+          <span>{{item.newsNote}}</span>
         </div>
-      </el-carousel-item>
-    </el-carousel>
+      </swiper-slide>
+      <div class="swiper-pagination"  slot="pagination"></div>
+  </swiper>
     <div class="title title-text">院线热映</div>
     <div class="theatre">
-      要写一个组件
+      <film-gallery></film-gallery>
     </div>
     <div class="title title-text comment">热门影评</div>
   </div>
 </template>
 
 <script>
+import FilmGallery from '.././components/FilmGallery'
+export default {
+  name: 'Hot',
+  components: {
+    FilmGallery
+  },
+  data () {
+    return {
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        autoplay: 3000,
+        speed: 1000,
+        loop: true
+      },
+      newsList: [{
+        id: '0001',
+        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/16/101307.24959458_620X620.jpg',
+        newsTitle: '“毒液”“神奇动物2”今日争夺票房冠军',
+        newsNote: '《无名之辈》获第三 《柯南》累计1.04亿'
+      }, {
+        id: '0002',
+        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/16/212251.52066548_620X620.jpg',
+        newsTitle: '"无敌破坏王2"上海迪士尼举办首映式',
+        newsNote: '口碑爆炸想象力天马行空 彩蛋集结眼花缭乱'
+      }, {
+        id: '0003',
+        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/17/103545.31986554_620X620.jpg',
+        newsTitle: '斯卡斯加德亮相"哥斯拉大战金刚"片场',
+        newsNote: '“怪兽宇宙”第四部正热拍中 2020年上映'
+      }, {
+        id: '0004',
+        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/17/035237.51963872_620X620.jpg',
+        newsTitle: '人生和电影不同，人生辛苦多了',
+        newsNote: '纪念《天堂电影院》上映30周年'
+      }]
+    }
+  },
+  methods: {
 
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
+  >>>.swiper-pagination-bullet-active
+    background: #FDB515
   .title
     height: .74rem
     padding: 0 .1rem
@@ -37,20 +81,19 @@
       float: left
       font-size: .4rem
       color: #2D445C
-  .el-carousel__item h3 
-    color: #475669;
-    font-size: .3rem;
-    opacity: 0.75;
-    line-height: .7rem;
-    margin: 0;
+  .swiper-img
+    width: 100%
+    height: 4rem
+    position: relative
   .news-title
-    margin-top: 2.5rem
-    margin-left: .2rem
-  .el-carousel__item:nth-child(2n) 
-     background-color: #99a9bf;
-  
-  .el-carousel__item:nth-child(2n+1) 
-     background-color: #d3dce6;
+    position: absolute
+    bottom: .4rem
+    padding: .1rem
+    color: #fff
+    h3
+      margin-bottom: .15rem
+      font-size: .35rem
+      font-weight: bold
   .title-text
     font-size: .35rem
     font-weight: bold
