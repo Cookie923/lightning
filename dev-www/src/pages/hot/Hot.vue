@@ -19,15 +19,21 @@
       <film-gallery></film-gallery>
     </div>
     <div class="title title-text comment">热门影评</div>
+    <film-comment></film-comment>
+    <bottom-tab class="bottom-tab"></bottom-tab>
   </div>
 </template>
 
 <script>
 import FilmGallery from '.././components/FilmGallery'
+import BottomTab from '.././components/BottomTab'
+import FilmComment from '.././components/FilmComment'
 export default {
   name: 'Hot',
   components: {
-    FilmGallery
+    FilmGallery,
+    BottomTab,
+    FilmComment
   },
   data () {
     return {
@@ -69,6 +75,10 @@ export default {
 <style lang="stylus" scoped>
   >>>.swiper-pagination-bullet-active
     background: #FDB515
+  >>>.swiper-pagination-bullet
+    width: .4rem
+    height: .05rem
+    border-radius: 0
   .title
     height: .74rem
     padding: 0 .1rem
@@ -101,4 +111,12 @@ export default {
     text-align: left
   .theatre
     height: 3.5rem
+  .bottom-tab
+    position: fixed
+    overflow: hidden
+    bottom: 0
+    width: 100%
+    z-index: 1
+    border-top: .01rem solid #f8f8f8
+    background: #fff
 </style>
