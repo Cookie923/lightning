@@ -1,13 +1,17 @@
 <template>
   <div class="bottom-tab">
-    <div class="tab-item">
-      <span class="iconfont">&#xe634;</span>
-      <span class="tab-title">热门</span>
-    </div>
-    <div class="tab-item">
-      <span class="iconfont">&#xe70e;</span>
-      <span class="tab-title">发现</span>
-    </div>
+    <router-link to='/'>
+      <div class="tab-item">
+        <span class="iconfont">&#xe634;</span>
+        <span class="tab-title">热门</span>
+      </div>
+    </router-link>
+    <router-link to='/search'>
+      <div class="tab-item">
+        <span class="iconfont">&#xe70e;</span>
+        <span class="tab-title">发现</span>
+      </div>
+    </router-link>
     <div class="tab-item">
       <span class="iconfont">&#xe6bd;</span>
       <span class="tab-title">动态</span>
@@ -34,9 +38,10 @@ export default {
     height: .9rem
     .tab-item
       display: flex
-      width: 25%
+      width: 1.8rem
       flex-flow: column
       text-align: center
+      color: #2D445C
       .iconfont
         font-size: .55rem
       .acount
