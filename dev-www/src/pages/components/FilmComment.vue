@@ -8,7 +8,7 @@
         </div>
         <div class="comment-text">
           <h3 class="comment-title">标题</h3>
-          <span>简略内容开头影评</span>
+          <span>简略内容影评</span>
         </div>
         <div class="comment-data">
           <span class="iconfont">&#xe71b;</span>8

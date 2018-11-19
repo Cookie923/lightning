@@ -28,6 +28,7 @@
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
 import FilmComment from '.././components/FilmComment'
+import axios from 'axios'
 export default {
   name: 'Hot',
   components: {
@@ -67,7 +68,16 @@ export default {
     }
   },
   methods: {
-
+    getHotInfo () {
+      axios.get('/api/hotInfo.json')
+        .then(this.getHotInfoSucc)
+    },
+    getHotInfoSucc (res) {
+      console.log(res)
+    }
+  },
+  mounted () {
+    this.getHotInfo()
   }
 }
 </script>
