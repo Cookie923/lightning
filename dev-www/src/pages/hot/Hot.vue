@@ -20,7 +20,7 @@
     </div>
     <div class="title title-text comment">热门影评</div>
     <film-comment></film-comment>
-    <bottom-tab class="bottom-tab"></bottom-tab>
+    <bottom-tab :tab="tab"></bottom-tab>
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
         speed: 1000,
         loop: true
       },
+      tab: 1,
       newsList: [{
         id: '0001',
         imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/16/101307.24959458_620X620.jpg',
@@ -121,12 +122,4 @@ export default {
     text-align: left
   .theatre
     height: 3.5rem
-  .bottom-tab
-    position: fixed
-    overflow: hidden
-    bottom: 0
-    width: 100%
-    z-index: 1
-    border-top: .01rem solid #f8f8f8
-    background: #fff
 </style>

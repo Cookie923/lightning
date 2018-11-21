@@ -1,6 +1,6 @@
 <template>
   <div>
-    搜索
+    用户账号
     <bottom-tab :tab="tab"></bottom-tab>
   </div>
 </template>
@@ -8,13 +8,13 @@
 <script>
 import BottomTab from '.././components/BottomTab'
 export default {
-  name: 'Search',
+  name: 'Account',
   components: {
     BottomTab
   },
   data () {
     return {
-      tab: 2,
+      tab: 4,
     }
   }
 }
