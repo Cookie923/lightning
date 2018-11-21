@@ -8,6 +8,9 @@
           豆瓣评分<span class="score">{{item.rating}}</span>
         </div>
       </swiper-slide>
+      <swiper-slide v-if="tab==4">
+        <div class="all">全部影片<i class="el-icon-d-arrow-right"></i></div>
+      </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
   </div>
@@ -16,6 +19,9 @@
 <script>
 export default {
   name: 'FilmGallery',
+  props: {
+    tab: Number
+  },
   data () {
     return {
       swiperOption: {
@@ -80,4 +86,10 @@ export default {
       opacity: 0.95
       .score
         margin-left: .1rem
+    .all
+      height: 2.8rem
+      border: .05rem dotted #f8f8f8
+      text-align: center
+      line-height: 2.8rem
+      color: #FDB515
 </style>
