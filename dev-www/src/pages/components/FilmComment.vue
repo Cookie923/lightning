@@ -69,6 +69,7 @@ export default {
         width: 2.4rem
         height: 1.6rem
         margin: .2rem
+        border-radius: .1rem
         background: #333
   .comment:last-child
     margin-bottom: .9rem

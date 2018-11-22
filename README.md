@@ -5,3 +5,6 @@ a vue.js project
 express-generator 4.16.0
 数据库：MongoDB 4.0.3
 前端：vue 2.9.6
++ element-ui
++ vue-awesome-swiper
++ vue-calendar-component

@@ -15,7 +15,7 @@
         inactive-color="#FDB515">
       </el-switch>
     </div>
-    <film-gallery :tab="tab"></film-gallery>
+    <film-gallery class="film-gallery" :tab="tab"></film-gallery>
     <div class="title">我的收藏</div>
     <div class="title">我的影评</div>
     <bottom-tab :tab="tab"></bottom-tab>
@@ -87,4 +87,6 @@ export default {
       .button
         display: block
         margin: 0.1rem auto
+    .film-gallery
+      height: 3.38rem
 </style>

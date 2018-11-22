@@ -5,27 +5,33 @@
       <span>全部100部</span>
     </div>
     <div class="gallery">
-      <div class="film">
-        <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-        <div class="film-name-box">
-          <i class="iconfont">&#xe62c;</i>
-          <span class="film-name">毒液：致命守护者</span>
+      <router-link to="/film-details">
+        <div class="film">
+          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
+          <div class="film-name-box">
+            <i class="iconfont">&#xe62c;</i>
+            <span class="film-name">毒液：致命守护者</span>
+          </div>
         </div>
-      </div>
-      <div class="film">
-        <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-        <div class="film-name-box">
-          <i class="iconfont">&#xe62d;</i>
-          <span class="film-name">毒液：致命守护者</span>
+      </router-link>
+      <router-link to="/film-details">
+        <div class="film">
+          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
+          <div class="film-name-box">
+            <i class="iconfont">&#xe62d;</i>
+            <span class="film-name">毒液：致命守护者</span>
+          </div>
         </div>
-      </div>
-      <div class="film">
-        <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-        <div class="film-name-box">
-          <i class="iconfont">&#xe630;</i>
-          <span class="film-name">毒液：致命守护者</span>
+      </router-link>
+      <router-link to="/film-details">
+        <div class="film">
+          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
+          <div class="film-name-box">
+            <i class="iconfont">&#xe630;</i>
+            <span class="film-name">毒液：致命守护者</span>
+          </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -36,7 +42,8 @@ export default {
   data () {
     return {
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
@@ -60,6 +67,7 @@ export default {
         padding: .15rem
         .film-name-box
           margin-top: .15rem
+          color: #333
         .film-name
           font-size: .2rem
 </style>

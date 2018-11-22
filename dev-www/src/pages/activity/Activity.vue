@@ -23,7 +23,9 @@
         <div class="user-img"></div>
         用户名称
         <span>想看</span>
-        <span>《你好，之华》</span>
+        <router-link to="/film-details">
+          <span>《你好，之华》</span>
+        </router-link>
         <span class="time">2天前</span>
       </div>
     </div>
@@ -32,7 +34,9 @@
         <div class="user-img"></div>
         用户名称
         <span>看过</span>
-        <span>《毒液：致命守护者》</span>
+        <router-link to="/film-details">
+          <span>《毒液：致命守护者》</span>
+        </router-link>
         <span class="time">11天前</span>
       </div>
     </div>
@@ -83,6 +87,7 @@ export default {
         background: #333
       span
         margin-left: .15rem
+        color: #333
         font-size: .27rem
       .time
         float: right

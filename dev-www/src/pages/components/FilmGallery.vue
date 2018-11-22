@@ -2,11 +2,13 @@
   <div class="gallery">
     <swiper :options="swiperOption">
       <swiper-slide v-for="item of filmList" :key="item.id">
-        <img :src="item.imgUrl">
-        <h3 class="film-title">{{item.title}}</h3>
-        <div class="douban-score">
-          豆瓣评分<span class="score">{{item.rating}}</span>
-        </div>
+        <router-link to="/film-details">
+          <img :src="item.imgUrl">
+          <h3 class="film-title">{{item.title}}</h3>
+          <div class="douban-score">
+            豆瓣评分<span class="score">{{item.rating}}</span>
+          </div>
+        </router-link>
       </swiper-slide>
       <swiper-slide v-if="tab==4">
         <div class="all">全部影片<i class="el-icon-d-arrow-right"></i></div>
@@ -75,6 +77,7 @@ export default {
     margin: .2rem
     .film-title
       margin-top: .1rem
+      color: #333
       font-size: .25rem
     .douban-score
       position: absolute
@@ -92,4 +95,6 @@ export default {
       text-align: center
       line-height: 2.8rem
       color: #FDB515
+    img
+      border-radius: .07rem
 </style>

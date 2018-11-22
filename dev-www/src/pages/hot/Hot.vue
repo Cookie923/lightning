@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="title">
-      <router-link to="/calender">
+      <router-link to="/calendar">
         <span class="iconfont">&#xe63c;</span>
       </router-link>
         Lighting
