@@ -59,12 +59,13 @@ export default {
       background: #FDB515
       .user-img
         width: 2rem
-        height: 2rem 
+        height: 2rem
         border-radius: 2rem
         background: #f8f8f8
       .user-name
         position: absolute
         margin-top: 1.3rem
+        color: #fff
         font-size: .3rem
         font-weight: bold
     .title

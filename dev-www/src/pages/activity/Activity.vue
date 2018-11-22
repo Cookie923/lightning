@@ -62,7 +62,7 @@ export default {
       padding: 0 .1rem
       background: #f8f8f8
       text-align: center
-      font-size: .4rem
+      font-size: .35rem
       color: #2D445C
       line-height: .74rem
     .msg

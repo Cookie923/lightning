@@ -35,7 +35,6 @@ export default {
   name: 'Billboard',
   data () {
     return {
-      
     }
   }
 }

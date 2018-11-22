@@ -1,7 +1,9 @@
 <template>
   <div>
     <header class="title">
-      <span class="iconfont">&#xe63c;</span>
+      <router-link to="/calender">
+        <span class="iconfont">&#xe63c;</span>
+      </router-link>
         Lighting
     </header>
     <swiper :options="swiperOption">
