@@ -6,6 +6,8 @@ import Activity from '@/pages/activity/Activity'
 import Account from '@/pages/account/Account'
 import SignInCalendar from '@/pages/hot/SignInCalendar'
 import FilmDetails from '@/pages/film/FilmDetails'
+import CommentDetails from '@/pages/film/CommentDetails'
+import NewsDetails from '@/pages/film/NewsDetails'
 
 Vue.use(Router)
 
@@ -35,6 +37,14 @@ export default new Router({
       path: '/film-details',
       name: 'Film',
       component: FilmDetails
+    }, {
+      path: '/comment-details',
+      name: 'Comment',
+      component: CommentDetails
+    }, {
+      path: '/news-details',
+      name: 'news',
+      component: NewsDetails
     }
   ]
 })
