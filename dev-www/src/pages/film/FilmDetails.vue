@@ -101,6 +101,7 @@ export default {
       background: #2D445C
       .film-img img
         width: 3rem
+        height: 4.2rem
         border-radius: .2rem
         box-shadow: .05rem .05rem 1rem #000
       .film-title

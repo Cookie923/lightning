@@ -15,4 +15,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .film-text
+  	padding: .2rem
 </style>
