@@ -2,6 +2,7 @@
   <div class="comment-details">
     <film-header :title="title"></film-header>
     <film-text></film-text>
+    <comment-list></comment-list>
     <film-features></film-features>
   </div>
 </template>
@@ -10,13 +11,15 @@
 import FilmHeader from './components/FilmHeader'
 import FilmText from './components/FilmText'
 import FilmFeatures from './components/FilmFeatures'
+import CommentList from './components/CommentList'
 
 export default {
   name: 'CommentDetails',
   components: {
     FilmHeader,
     FilmText,
-    FilmFeatures
+    FilmFeatures,
+    CommentList
   },
   data () {
     return {

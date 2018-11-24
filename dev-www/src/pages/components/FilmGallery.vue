@@ -11,7 +11,7 @@
         </router-link>
       </swiper-slide>
       <swiper-slide v-if="tab==4">
-        <div class="all">全部影片<i class="el-icon-d-arrow-right"></i></div>
+        <div class="all" @click="jumpToList()">全部影片<i class="el-icon-d-arrow-right"></i></div>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
@@ -66,6 +66,11 @@ export default {
         rating: 6.1,
         imgUrl: 'http://img5.mtime.cn/mt/2018/10/17/110808.38008587_100X140X4.jpg'
       }]
+    }
+  },
+  methods: {
+    jumpToList () {
+      this.$router.push('/account/mylist')
     }
   }
 }

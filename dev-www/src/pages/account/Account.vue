@@ -1,8 +1,11 @@
 <template>
   <div class="account">
-    <div class="user">
+    <div class="user" v-if="sign==1">
       <div class="user-img"></div>
       <div class="user-name">用户名</div>
+    </div>
+    <div class="user" v-if="sign!==1">
+      <el-button class="button" type="warning" round @click="tologIn()">登录 / 注册</el-button>
     </div>
     <div class="title">
       观影记录
@@ -16,11 +19,11 @@
       </el-switch>
     </div>
     <film-gallery class="film-gallery" :tab="tab"></film-gallery>
-    <div class="title">我的收藏</div>
+    <div class="title" @click="jumpTocollection()">我的收藏</div>
     <div class="title">我的影评</div>
     <bottom-tab :tab="tab"></bottom-tab>
     <div class="button-box">
-      <el-button class="button" type="warning" round>修改密码</el-button>
+      <el-button class="button" type="warning" round @click="jumpToPassword()">修改密码</el-button>
       <el-button class="button" type="warning" round>退出登录</el-button>
     </div>
   </div>
@@ -38,7 +41,19 @@ export default {
   data () {
     return {
       tab: 4,
-      value: false
+      value: false,
+      sign: 0
+    }
+  },
+  methods: {
+    jumpTocollection () {
+      this.$router.push('/account/mycollection')
+    },
+    jumpToPassword () {
+      this.$router.push('/account/password')
+    },
+    tologIn () {
+      this.$router.push('/account/log')
     }
   }
 }

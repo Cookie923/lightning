@@ -2,7 +2,7 @@
   <div class="billboard">
     <div class="title">
       <h3>榜单名称</h3>
-      <span>全部100部</span>
+      <span @click="jumpToList()">全部100部</span>
     </div>
     <div class="gallery">
       <router-link to="/film-details">
@@ -43,7 +43,11 @@ export default {
     return {
     }
   },
-  methods: {}
+  methods: {
+    jumpToList () {
+      this.$router.push('/search/billboardlist')
+    }
+  }
 }
 </script>
 
@@ -65,6 +69,10 @@ export default {
       display: flex
       .film
         padding: .15rem
+        img
+          width: 2rem
+          height: 2.8rem
+          border-radius: .1rem
         .film-name-box
           margin-top: .15rem
           color: #333

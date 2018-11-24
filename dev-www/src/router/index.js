@@ -8,6 +8,11 @@ import SignInCalendar from '@/pages/hot/SignInCalendar'
 import FilmDetails from '@/pages/film/FilmDetails'
 import CommentDetails from '@/pages/film/CommentDetails'
 import NewsDetails from '@/pages/film/NewsDetails'
+import BillboardList from '@/pages/search/BillboardList'
+import MyList from '@/pages/account/MyList'
+import MyCollection from '@/pages/account/MyCollection'
+import Password from '@/pages/account/Password'
+import LogIn from '@/pages/account/LogIn'
 
 Vue.use(Router)
 
@@ -45,6 +50,26 @@ export default new Router({
       path: '/news-details',
       name: 'news',
       component: NewsDetails
+    }, {
+      path: '/search/billboardlist',
+      name: 'billboardlist',
+      component: BillboardList
+    }, {
+      path: '/account/mylist',
+      name: 'mylist',
+      component: MyList
+    }, {
+      path: '/account/mycollection',
+      name: 'mycollection',
+      component: MyCollection
+    }, {
+      path: '/account/password',
+      name: 'password',
+      component: Password
+    }, {
+      path: '/account/log',
+      name: 'log',
+      component: LogIn
     }
   ]
 })
