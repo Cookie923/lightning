@@ -1,6 +1,6 @@
 <template>
   <div class="film-comment">
-    <div class="comment" v-for="item in 3" :key="item">
+    <div class="comment" v-for="item in 3" :key="item" @click="jumpToDetails()">
       <div class="comment-details">
         <div class="user">
           <div class="user-img"></div>
@@ -28,6 +28,11 @@ export default {
   name: 'FilmComment',
   data () {
     return {}
+  },
+  methods: {
+    jumpToDetails () {
+      this.$router.push('/comment-details')
+    }
   }
 }
 </script>

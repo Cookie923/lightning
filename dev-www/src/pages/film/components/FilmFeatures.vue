@@ -35,6 +35,7 @@ export default {
     width: 100%
     z-index: 1
     border-top: .02rem solid #f8f8f8
+    background: #fff
     .input
       width: 75%
     .features

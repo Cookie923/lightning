@@ -1,7 +1,7 @@
 <template>
   <div class="activity">
     <header class="title">动态</header>
-    <div class="msg comment">
+    <div class="msg comment" @click="jumpToDetails()">
       <div class="comment-details">
         <div class="user-img"></div>
         用户名称
@@ -54,6 +54,11 @@ export default {
   data () {
     return {
       tab: 3
+    }
+  },
+  methods: {
+    jumpToDetails () {
+      this.$router.push('/comment-details')
     }
   }
 }

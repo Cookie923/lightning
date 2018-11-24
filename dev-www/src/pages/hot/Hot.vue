@@ -8,11 +8,13 @@
     </header>
     <swiper :options="swiperOption">
       <swiper-slide v-for="item of newsList" :key="item.id">
-        <img class="swiper-img" :src="item.imgUrl">
-        <div class="news-title">
-          <h3>{{item.newsTitle}}</h3>
-          <span>{{item.newsNote}}</span>
-        </div>
+        <router-link to="/news-details">
+          <img class="swiper-img" :src="item.imgUrl">
+          <div class="news-title">
+            <h3>{{item.newsTitle}}</h3>
+            <span>{{item.newsNote}}</span>
+          </div>
+        </router-link>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
   </swiper>

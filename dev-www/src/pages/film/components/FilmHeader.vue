@@ -36,6 +36,10 @@ export default {
   .header
     display: flex
     justify-content: space-between
+    position: fixed
+    top: 0
+    box-sizing: border-box
+    width: 100%
     height: .74rem
     padding: 0 .1rem
     background: #f8f8f8
