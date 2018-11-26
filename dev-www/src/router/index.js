@@ -13,6 +13,7 @@ import MyList from '@/pages/account/MyList'
 import MyCollection from '@/pages/account/MyCollection'
 import Password from '@/pages/account/Password'
 import LogIn from '@/pages/account/LogIn'
+import Register from '@/pages/account/Register'
 
 Vue.use(Router)
 
@@ -67,9 +68,13 @@ export default new Router({
       name: 'password',
       component: Password
     }, {
-      path: '/account/log',
-      name: 'log',
+      path: '/account/login',
+      name: 'login',
       component: LogIn
+    }, {
+      path: '/account/register',
+      name: 'register',
+      component: Register
     }
   ]
 })

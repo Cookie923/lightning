@@ -10,6 +10,7 @@
     <div class="title">
       观影记录
       <el-switch
+        v-if="sign==1"
         class="switch"
         v-model="value"
         active-text="看过"
@@ -18,11 +19,11 @@
         inactive-color="#FDB515">
       </el-switch>
     </div>
-    <film-gallery class="film-gallery" :tab="tab"></film-gallery>
+    <film-gallery v-if="sign==1" class="film-gallery" :tab="tab"></film-gallery>
     <div class="title" @click="jumpTocollection()">我的收藏</div>
     <div class="title">我的影评</div>
     <bottom-tab :tab="tab"></bottom-tab>
-    <div class="button-box">
+    <div class="button-box" v-if="sign==1">
       <el-button class="button" type="warning" round @click="jumpToPassword()">修改密码</el-button>
       <el-button class="button" type="warning" round>退出登录</el-button>
     </div>
@@ -53,7 +54,7 @@ export default {
       this.$router.push('/account/password')
     },
     tologIn () {
-      this.$router.push('/account/log')
+      this.$router.push('/account/login')
     }
   }
 }
