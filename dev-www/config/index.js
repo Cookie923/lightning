@@ -12,9 +12,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api': {
-            target: 'http://localhost:8080',
+            target: 'http://api.douban.com/v2',
             pathRewrite: {
-                '^/api': '/static/mock'
+                '^/api': ''
             }
         }
     },

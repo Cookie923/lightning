@@ -6,16 +6,12 @@
     <div class="box">
       <h3>LIGHTNING</h3>
       <div class="input-box">
-        <el-input v-model="id" placeholder="账号" autofocus></el-input>
-        <el-input v-model="psw" placeholder="密码"></el-input>
+        <el-input v-model="newid" placeholder="账号" autofocus></el-input>
+        <el-input v-model="newpsw" placeholder="密码"></el-input>
+        <el-input v-model="newpswa" placeholder="确认密码"></el-input>
       </div>
       <div class="button">
-        <el-button type="warning" round @click="login()">确 定</el-button>
-      </div>
-      <div class="signup">
-        还没有账号？
-        <span class="el-icon-d-arrow-right"></span>
-        <span @click="toRegister()">新用户注册</span>
+        <el-button type="warning" round @click="register()">注 册</el-button>
       </div>
     </div>
   </div>
@@ -24,23 +20,21 @@
 <script>
 
 export default {
-  name: 'LogIn',
+  name: 'Register',
   components: {
   },
   data () {
     return {
-      id: '',
-      psw: ''
+      newid: '',
+      newpsw: '',
+      newpswa: ''
     }
   },
   methods: {
     back () {
       this.$router.go(-1)
     },
-    toRegister () {
-      this.$router.push('/account/register')
-    },
-    login () {
+    register () {
       this.$router.push('/account')
     }
   }
@@ -72,9 +66,4 @@ export default {
       h3
         margin: 2rem 2rem 1rem 2rem
         text-align: center
-      .signup
-        float: right
-        margin-top: .3rem
-        span
-          color: #FDB515
 </style>
