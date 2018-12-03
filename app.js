@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//引入数据库
+var mongoose = require('./config/mongoose');
+var db = mongoose();
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -14,7 +17,6 @@ app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
-
 
 app.use(logger('dev'));
 app.use(express.json());
