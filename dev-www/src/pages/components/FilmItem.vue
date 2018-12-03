@@ -46,7 +46,6 @@ export default {
         background: #333
         margin: .3rem
       .film-info
-       
         margin-top: .3rem
         h3
           margin-top: .2rem
@@ -59,4 +58,3 @@ export default {
         .details
           margin-top: .1rem
 </style>
-

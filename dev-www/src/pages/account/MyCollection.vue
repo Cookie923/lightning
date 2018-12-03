@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import FilmComment from "./../components/FilmComment";
+import FilmComment from './../components/FilmComment'
 
 export default {
   name: 'MyCollection',

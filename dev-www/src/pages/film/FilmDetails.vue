@@ -53,6 +53,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import FilmComment from '.././components/FilmComment'
 import StuffGallery from './components/StuffGallery'
@@ -75,6 +76,7 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
   >>>.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover
     background-color: #f8f4ec

@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>  
+<script>
 import FilmHeader from './components/FilmHeader'
 import FilmText from './components/FilmText'
 import FilmFeatures from './components/FilmFeatures'

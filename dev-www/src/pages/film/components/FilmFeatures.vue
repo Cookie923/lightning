@@ -15,7 +15,7 @@ export default {
   name: 'FilmFeatures',
   data () {
     return {
-    	input: ''
+      input: ''
     }
   }
 }
