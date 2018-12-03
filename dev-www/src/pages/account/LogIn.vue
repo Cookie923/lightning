@@ -6,8 +6,12 @@
     <div class="box">
       <h3>LIGHTNING</h3>
       <div class="input-box">
-        <el-input v-model="id" placeholder="账号" autofocus></el-input>
-        <el-input v-model="psw" placeholder="密码"></el-input>
+        <el-input
+          v-model="username"
+          placeholder="用户名"
+          autofocus>
+        </el-input>
+        <el-input v-model="password" placeholder="密码"></el-input>
       </div>
       <div class="button">
         <el-button type="warning" round @click="login()">确 定</el-button>
@@ -29,8 +33,8 @@ export default {
   },
   data () {
     return {
-      id: '',
-      psw: ''
+      username: '',
+      password: ''
     }
   },
   methods: {
