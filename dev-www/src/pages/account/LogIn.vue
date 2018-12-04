@@ -32,7 +32,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'LogIn',
   components: {
@@ -67,7 +67,25 @@ export default {
       }
     },
     login () {
-      this.$router.push('/account')
+      axios.post('/account/login', {
+        username: this.username,
+        password: this.password
+      }).then((res) => {
+        if (res.data.code === 3) {
+          this.$message({
+            message: '用户名不存在或密码不正确(；д；)',
+            type: 'warning'
+          })
+        } else if (res.data.code === 2) {
+          this.$message({
+            message: `${res.data.userInfo.username},欢迎回来`,
+            type: 'success'
+          })
+          window.setTimeout(this.$router.push('/account'), 4000)
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }

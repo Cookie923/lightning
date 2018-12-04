@@ -64,13 +64,20 @@ export default {
     register () {
       axios.post('/account/register', {
         username: this.username,
-        password: this.password,
-      }).then((response) => {
-        console.log(response)
-      }).catch(function (error) {
+        password: this.password
+      }).then((res) => {
+        if (res.data.code === 1) {
+          this.usernameExisted = true
+        } else if (res.data.code === 2) {
+          this.$message({
+            message: '注册成功哟ヾ(◍°∇°◍)ﾉﾞ,赶快登录吧！',
+            type: 'success'
+          })
+          window.setTimeout(this.back(), 5000)
+        }
+      }).catch((error) => {
         console.log(error)
       })
-      // this.$router.push('/account')
     },
     tipsName () {
       if (this.username === '') {

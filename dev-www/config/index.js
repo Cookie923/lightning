@@ -16,6 +16,12 @@ module.exports = {
             pathRewrite: {
                 '^/api': ''
             }
+        },
+        '/account': {
+            target: 'http://localhost:3000/',
+            pathRewrite: {
+                '^/account': '/account'
+            }
         }
     },
 
