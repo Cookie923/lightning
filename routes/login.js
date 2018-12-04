@@ -4,7 +4,7 @@ var router = express.Router();
 //引入model
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var User = require('../models/User');
+var User = require('../models/User.js');
 
 //统一返回格式
 var responseData;
@@ -23,8 +23,8 @@ router.use(function (req, res, next) {
 router.post('/account/register', function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
-  var repassword = req.body.repassword;
   //判断用户名是否已被注册
+  // console.log(User)
   User.findOne({
     username: username
   },function (err, doc) {
@@ -58,6 +58,7 @@ router.post('/account/login', function(req, res){
     username: username,
     password: password
   },function (err, doc) {
+    // console.log(doc)
     if(doc){
       responseData.code = 2;
       responseData.message = '登录成功！';
@@ -66,7 +67,8 @@ router.post('/account/login', function(req, res){
         username: doc.username
       };
       //存入cookies
-      req.cookies.set('userInfo',JSON.stringify({
+      // req.cookies.set('userInfo',JSON.stringify({
+        res.cookie('userInfo',JSON.stringify({
         _id: doc._id,
         username: doc.username
       }));

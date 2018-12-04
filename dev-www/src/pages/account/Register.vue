@@ -56,13 +56,21 @@ export default {
     }
   },
   methods: {
-    //返回
+    // 返回
     back () {
       this.$router.go(-1)
     },
-    //注册
+    // 注册
     register () {
-      this.$router.push('/account')
+      axios.post('/account/register', {
+        username: this.username,
+        password: this.password,
+      }).then((response) => {
+        console.log(response)
+      }).catch(function (error) {
+        console.log(error)
+      })
+      // this.$router.push('/account')
     },
     tipsName () {
       if (this.username === '') {
@@ -76,7 +84,7 @@ export default {
         this.pwdEmpty = true
       } else {
         this.pwdEmpty = false
-        if (this.password !== this.repassword && this.repassword !=='') {
+        if (this.password !== this.repassword && this.repassword !== '') {
           this.different = true
         } else {
           this.different = false
@@ -89,21 +97,21 @@ export default {
         this.different = false
       } else {
         this.repwdEmpty = false
-        if (this.password !== this.repassword && this.password !=='' && this.repassword !=='') {
+        if (this.password !== this.repassword && this.password !== '' && this.repassword !== '') {
           this.different = true
         } else {
           this.different = false
         }
       }
     },
-    //判断可否点击注册按钮
+    // 判断可否点击注册按钮
     buttonClear () {
-      if (this.username !== '' && this.password !=='' && this.repassword !== '' && this.repassword === this.password) {
+      if (this.username !== '' && this.password !== '' && this.repassword !== '' && this.repassword === this.password) {
         this.disabledButtom = false
       } else {
         this.disabledButtom = true
       }
-    },
+    }
   },
   mounted () {
   }

@@ -11,10 +11,16 @@
           placeholder="用户名"
           autofocus>
         </el-input>
-        <el-input v-model="password" placeholder="密码"></el-input>
+        <el-input v-model="password" type="password" placeholder="密码"></el-input>
       </div>
       <div class="button">
-        <el-button type="warning" round @click="login()">确 定</el-button>
+        <el-button
+          type="warning"
+          round
+          :disabled="disabledButtom"
+          @click="login()">
+          确 定
+        </el-button>
       </div>
       <div class="signup">
         还没有账号？
@@ -34,7 +40,16 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      disabledButtom: true
+    }
+  },
+  watch: {
+    username () {
+      this.buttonClear()
+    },
+    password () {
+      this.buttonClear()
     }
   },
   methods: {
@@ -43,6 +58,13 @@ export default {
     },
     toRegister () {
       this.$router.push('/account/register')
+    },
+    buttonClear () {
+      if (this.username !== '' && this.password !== '') {
+        this.disabledButtom = false
+      } else {
+        this.disabledButtom = true
+      }
     },
     login () {
       this.$router.push('/account')
