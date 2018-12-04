@@ -6,6 +6,7 @@
 数据库：MongoDB 4.0.3
 mongoose
 前端：vue 2.9.6
++ axios
 + element-ui
 + vue-awesome-swiper
 + vue-calendar-component
