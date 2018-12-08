@@ -12,8 +12,8 @@
         <i
           class="tips tips-name el-icon-warning"
           v-show="usernameExisted">用户名已存在</i>
-        <el-input v-model="password" placeholder="密码" type="password" @blur="tipsPwd()"></el-input>
-        <i class="tips tips-pwd el-icon-warning" v-show="pwdEmpty">密码不能为空</i>
+        <el-input v-model="password" placeholder="请输入密码，至少为六位" type="password" @blur="tipsPwd()"></el-input>
+        <i class="tips tips-pwd el-icon-warning" v-show="pwdAtLeast">密码至少为六位（数字、字母、下划线）</i>
         <el-input v-model="repassword" placeholder="确认密码" type="password" @blur="tipsRepwd()"></el-input>
         <i class="tips tips-repwd el-icon-warning" v-show="repwdEmpty">密码不能为空</i>
         <i class="tips tips-repwd el-icon-warning" v-show="different">两次密码不一致</i>
@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'Register',
   components: {
@@ -37,8 +38,8 @@ export default {
       password: '',
       repassword: '',
       usernameEmpty: false,
+      pwdAtLeast: false,
       usernameExisted: false,
-      pwdEmpty: false,
       repwdEmpty: false,
       different: false,
       disabledButtom: true
@@ -49,6 +50,11 @@ export default {
       this.buttonClear()
     },
     password () {
+      if (this.password !== '' && this.password.length < 6) {
+        this.pwdAtLeast = true
+      } else {
+        this.pwdAtLeast = false
+      }
       this.buttonClear()
     },
     repassword () {
@@ -87,15 +93,10 @@ export default {
       }
     },
     tipsPwd () {
-      if (this.password === '') {
-        this.pwdEmpty = true
+      if (this.password !== this.repassword && this.repassword !== '') {
+        this.different = true
       } else {
-        this.pwdEmpty = false
-        if (this.password !== this.repassword && this.repassword !== '') {
-          this.different = true
-        } else {
-          this.different = false
-        }
+        this.different = false
       }
     },
     tipsRepwd () {

@@ -6,6 +6,9 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var User = require('../models/User.js');
 
+//引入md5加密
+var md5 = require('../config/MD5.js');
+
 //统一返回格式
 var responseData;
 
@@ -23,6 +26,9 @@ router.use(function (req, res, next) {
 router.post('/account/register', function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  //加密
+  password = md5(password);
+
   //判断用户名是否已被注册
   // console.log(User)
   User.findOne({
@@ -53,6 +59,7 @@ router.post('/account/register', function (req, res) {
 router.post('/account/login', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
+  password = md5(password);
   //判断用户名是否已经注册
   User.findOne({
     username: username,
