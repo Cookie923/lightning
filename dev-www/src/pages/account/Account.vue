@@ -1,7 +1,9 @@
 <template>
   <div class="account">
     <div class="user" v-if="sign==1">
-      <div class="user-img"></div>
+      <div class="user-img">
+        <img class="avatar" src="../../assets/img/lightning.png">
+      </div>
       <div class="user-name">用户名</div>
     </div>
     <div class="user" v-if="sign!==1">
@@ -25,7 +27,7 @@
     <bottom-tab :tab="tab"></bottom-tab>
     <div class="button-box" v-if="sign==1">
       <el-button class="button" type="warning" round @click="jumpToPassword()">修改密码</el-button>
-      <el-button class="button" type="warning" round>退出登录</el-button>
+      <el-button class="button" type="warning" round @click="quitlogin()">退出登录</el-button>
     </div>
   </div>
 </template>
@@ -33,6 +35,7 @@
 <script>
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
+import { deleteCookie } from '../../api/cookie.js'
 export default {
   name: 'Account',
   components: {
@@ -43,7 +46,7 @@ export default {
     return {
       tab: 4,
       value: false,
-      sign: 0
+      sign: 1
     }
   },
   methods: {
@@ -55,6 +58,10 @@ export default {
     },
     tologIn () {
       this.$router.push('/account/login')
+    },
+    quitlogin () {
+      deleteCookie('userInfo')
+      this.sign = 0
     }
   }
 }
@@ -78,6 +85,8 @@ export default {
         height: 2rem
         border-radius: 2rem
         background: #f8f8f8
+        .avatar
+          width: 100%
       .user-name
         position: absolute
         margin-top: 1.3rem

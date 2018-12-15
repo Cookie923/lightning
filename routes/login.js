@@ -27,7 +27,7 @@ router.post('/account/register', function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
   //加密
-  password = md5(password);
+  // password = md5(password);
 
   //判断用户名是否已被注册
   // console.log(User)
@@ -88,6 +88,34 @@ router.post('/account/login', function(req, res){
     return;
   });
 });
+
+/* 修改密码 */
+router.post('/account/password', function (req, res) {
+  var username = req.body.username;
+  var oldPsw = req.body.oldPsw;
+  var newPsw = req.body.newPsw;
+  // oldPsw = md5(oldPsw);
+  // newPsw = md5(newPsw);
+  User.updateOne({
+    username: username,
+    password: oldPsw
+  },{$set:{
+    password: newPsw
+  }},function(err, doc){
+    // console.log(doc)
+    if(doc.nModified === 1){
+      responseData.code = 2;
+      responseData.message = '密码修改成功！';
+      res.json(responseData);
+      return;
+    }
+    responseData.code = 3;
+    responseData.message = '用户旧密码不正确！';
+    res.json(responseData);
+    return
+  });
+});
+
 
 //导出数据
 module.exports = router;
