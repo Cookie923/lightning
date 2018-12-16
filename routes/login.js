@@ -59,7 +59,7 @@ router.post('/account/register', function (req, res) {
 router.post('/account/login', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
-  password = md5(password);
+  // password = md5(password);
   //判断用户名是否已经注册
   User.findOne({
     username: username,
@@ -94,6 +94,7 @@ router.post('/account/password', function (req, res) {
   var username = req.body.username;
   var oldPsw = req.body.oldPsw;
   var newPsw = req.body.newPsw;
+  console.log(username)
   // oldPsw = md5(oldPsw);
   // newPsw = md5(newPsw);
   User.updateOne({
@@ -102,7 +103,7 @@ router.post('/account/password', function (req, res) {
   },{$set:{
     password: newPsw
   }},function(err, doc){
-    // console.log(doc)
+    console.log(doc)
     if(doc.nModified === 1){
       responseData.code = 2;
       responseData.message = '密码修改成功！';
