@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {
         '/api': {
             target: 'http://api.douban.com/v2',
+            changeOrigin: true,
             pathRewrite: {
                 '^/api': ''
             }
@@ -21,6 +22,14 @@ module.exports = {
             target: 'http://localhost:3000/',
             pathRewrite: {
                 '^/account': '/account'
+            }
+        },
+        '/news': {
+            // target: 'http://m.mtime.cn/Service/callback.mi/PageSubArea/',
+            target: 'http://m.mtime.cn/Service/callback.mi/News/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/news': '/'
             }
         }
     },

@@ -1,0 +1,1 @@
+export const SET_NEWS_ID = 'SET_NEWS_ID'

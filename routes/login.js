@@ -74,10 +74,11 @@ router.post('/account/login', function(req, res){
         username: doc.username
       };
       //存入cookies
+      // console.log(doc.username)
       // req.cookies.set('userInfo',JSON.stringify({
         res.cookie('userInfo',JSON.stringify({
         _id: doc._id,
-        username: doc.username
+        username: escape(doc.username)
       }));
       res.json(responseData);
       return

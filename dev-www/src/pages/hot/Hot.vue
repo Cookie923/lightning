@@ -6,21 +6,23 @@
       </router-link>
         Lighting
     </header>
-    <swiper :options="swiperOption">
-      <swiper-slide v-for="item of newsList" :key="item.id">
-        <router-link to="/news-details">
-          <img class="swiper-img" :src="item.imgUrl">
-          <div class="news-title">
-            <h3>{{item.newsTitle}}</h3>
-            <span>{{item.newsNote}}</span>
+    <div class="wrapper">
+      <swiper :options="swiperOption">
+        <swiper-slide v-for="item of newsList" :key="item.id">
+          <div @click="toNewsDetails(item.id)">
+            <img class="swiper-img" :src="item.image?item.image:item.images[0].url1">
+            <div class="news-title">
+              <h3>{{item.title}}</h3>
+              <span>{{item.title2}}</span>
+            </div>
           </div>
-        </router-link>
-      </swiper-slide>
-      <div class="swiper-pagination"  slot="pagination"></div>
-  </swiper>
+        </swiper-slide>
+        <div class="swiper-pagination"  slot="pagination"></div>
+      </swiper>
+    </div>
     <div class="title title-text">院线热映</div>
     <div class="theatre">
-      <film-gallery></film-gallery>
+      <film-gallery :theater="theaterFilm"></film-gallery>
     </div>
     <div class="title title-text comment">热门影评</div>
     <film-comment></film-comment>
@@ -32,7 +34,9 @@
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
 import FilmComment from '.././components/FilmComment'
-// import axios from 'axios'
+import { getFilmNews } from '../../api/film-news'
+import { getFilmInTheaters } from '../../api/film-in-theaters'
+
 export default {
   name: 'Hot',
   components: {
@@ -49,40 +53,25 @@ export default {
         loop: true
       },
       tab: 1,
-      newsList: [{
-        id: '0001',
-        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/16/101307.24959458_620X620.jpg',
-        newsTitle: '“毒液”“神奇动物2”今日争夺票房冠军',
-        newsNote: '《无名之辈》获第三 《柯南》累计1.04亿'
-      }, {
-        id: '0002',
-        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/16/212251.52066548_620X620.jpg',
-        newsTitle: '"无敌破坏王2"上海迪士尼举办首映式',
-        newsNote: '口碑爆炸想象力天马行空 彩蛋集结眼花缭乱'
-      }, {
-        id: '0003',
-        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/17/103545.31986554_620X620.jpg',
-        newsTitle: '斯卡斯加德亮相"哥斯拉大战金刚"片场',
-        newsNote: '“怪兽宇宙”第四部正热拍中 2020年上映'
-      }, {
-        id: '0004',
-        imgUrl: 'http://img5.mtime.cn/CMS/News/2018/11/17/035237.51963872_620X620.jpg',
-        newsTitle: '人生和电影不同，人生辛苦多了',
-        newsNote: '纪念《天堂电影院》上映30周年'
-      }]
+      newsList: [],
+      theaterFilm: {}
     }
   },
   methods: {
-    getHotInfo () {
-      // axios.get('/api/hotInfo.json')
-      //   .then(this.getHotInfoSucc)
-    },
-    getHotInfoSucc (res) {
-      console.log(res)
+    toNewsDetails (id) {
+      this.$router.push({
+        path: `/news-details?id=${id}`
+      })
     }
   },
   mounted () {
-    this.getHotInfo()
+    getFilmNews().then((res) => {
+      this.newsList = res.newsList
+      this.newsList.length = 5
+    })
+    getFilmInTheaters('北京', 0, 10).then((res) => {
+      this.theaterFilm = res.subjects
+    })
   }
 }
 </script>
@@ -106,6 +95,9 @@ export default {
       float: left
       font-size: .4rem
       color: #2D445C
+  .wrapper
+    overflow: hidden
+    height: 4rem
   .swiper-img
     width: 100%
     height: 4rem
@@ -115,6 +107,8 @@ export default {
     bottom: .4rem
     padding: .1rem
     color: #fff
+    background: #2D445C
+    opacity: 0.85
     h3
       margin-bottom: .15rem
       font-size: .35rem
@@ -125,5 +119,5 @@ export default {
   .comment
     text-align: left
   .theatre
-    height: 3.5rem
+    height: 3.35rem
 </style>

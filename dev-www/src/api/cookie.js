@@ -3,7 +3,8 @@ export function getCookie (name) {
   var arr
   var reg = new RegExp('(^|)' + name + '=([^;]*)(;|$)')
   if (arr = document.cookie.match(reg)) {
-    return unescape(arr[2])
+    var unescapeArr = unescape(arr[2])
+    return unescape(unescapeArr)
   } else {
     return null
   }

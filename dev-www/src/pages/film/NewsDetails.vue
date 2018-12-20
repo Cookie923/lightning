@@ -1,7 +1,7 @@
 <template>
   <div class="news-details">
     <film-header :title="title"></film-header>
-    <film-text></film-text>
+    <film-text :detail="newsInfo"></film-text>
     <comment-list></comment-list>
     <film-features></film-features>
   </div>
@@ -12,6 +12,7 @@ import FilmHeader from './components/FilmHeader'
 import FilmText from './components/FilmText'
 import FilmFeatures from './components/FilmFeatures'
 import CommentList from './components/CommentList'
+import { getNewsDetails } from '../../api/film-news'
 
 export default {
   name: 'NewsDetails',
@@ -23,8 +24,15 @@ export default {
   },
   data () {
     return {
-      title: '影讯'
+      title: '影讯',
+      id: this.$route.query.id,
+      newsInfo: {}// 影讯详情
     }
+  },
+  mounted () {
+    getNewsDetails(this.id).then((res) => {
+      this.newsInfo = res
+    })
   }
 }
 </script>

@@ -1,14 +1,17 @@
 <template>
   <div class="gallery">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="item of filmList" :key="item.id">
-        <router-link to="/film-details">
-          <img :src="item.imgUrl">
+      <swiper-slide v-for="item of theater" :key="item.id">
+        <div @click="jumpToDetail(item.id)">
+          <img :src="item.images.small">
           <h3 class="film-title">{{item.title}}</h3>
-          <div class="douban-score">
-            豆瓣评分<span class="score">{{item.rating}}</span>
+          <div class="douban-score" v-show="item.rating.average">
+            豆瓣评分<span class="score">{{item.rating.average}}</span>
           </div>
-        </router-link>
+          <div class="douban-score new" v-show="!item.rating.average">
+            暂无评分
+          </div>
+        </div>
       </swiper-slide>
       <swiper-slide v-if="tab==4">
         <div class="all" @click="jumpToList()">全部影片<i class="el-icon-d-arrow-right"></i></div>
@@ -21,9 +24,7 @@
 <script>
 export default {
   name: 'FilmGallery',
-  props: {
-    tab: Number
-  },
+  props: ['tab', 'theater'],
   data () {
     return {
       swiperOption: {
@@ -34,43 +35,17 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         }
-      },
-      filmList: [{
-        id: '0001',
-        title: '毒液：致命守护者',
-        rating: 7.4,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg'
-      }, {
-        id: '0002',
-        title: '神奇动物：格林德沃之罪',
-        rating: 7.5,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/11/08/112801.60891528_100X140X4.jpg'
-      }, {
-        id: '0003',
-        title: '名侦探柯南：零的执行人',
-        rating: 5.9,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/10/17/093851.96263453_100X140X4.jpg'
-      }, {
-        id: '0004',
-        title: '你好，之华',
-        rating: 7.1,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/10/29/091910.64953146_100X140X4.jpg'
-      }, {
-        id: '0005',
-        title: '无名之辈',
-        rating: 8.4,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/09/13/113722.40019611_100X140X4.jpg'
-      }, {
-        id: '0006',
-        title: '胡桃夹子和四个王国',
-        rating: 6.1,
-        imgUrl: 'http://img5.mtime.cn/mt/2018/10/17/110808.38008587_100X140X4.jpg'
-      }]
+      }
     }
   },
   methods: {
     jumpToList () {
       this.$router.push('/account/mylist')
+    },
+    jumpToDetail (id) {
+      this.$router.push({
+        path: `/film-details?id=${id}`
+      })
     }
   }
 }
@@ -94,6 +69,8 @@ export default {
       opacity: 0.95
       .score
         margin-left: .1rem
+    .douban-score.new
+        background: #2D445C
     .all
       height: 2.8rem
       border: .05rem dotted #f8f8f8
@@ -101,5 +78,7 @@ export default {
       line-height: 2.8rem
       color: #FDB515
     img
+      width: 2rem
+      height: 2.8rem
       border-radius: .07rem
 </style>

@@ -1,10 +1,23 @@
 <template>
   <div class="stuff-gallery">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="item of stuffList" :key="item.id">
-        <img :src="item.imgUrl">
+      <swiper-slide v-for="item of director" :key="item.id">
+        <img :src="item.avatars.small">
         <h3 class="stuff-name">{{item.name}}</h3>
-        <h3 class="stuff-name s-position">{{item.position}}</h3>
+        <h3 class="stuff-name">{{item.name_en}}</h3>
+        <h3 class="stuff-name s-position">导演</h3>
+      </swiper-slide>
+      <swiper-slide v-for="item of cast" :key="item.id">
+        <img :src="item.avatars.small">
+        <h3 class="stuff-name">{{item.name}}</h3>
+        <h3 class="stuff-name">{{item.name_en}}</h3>
+        <h3 class="stuff-name s-position">演员</h3>
+      </swiper-slide>
+      <swiper-slide v-for="item of writer" :key="item.id">
+        <img :src="item.avatars.small">
+        <h3 class="stuff-name">{{item.name}}</h3>
+        <h3 class="stuff-name">{{item.name_en}}</h3>
+        <h3 class="stuff-name s-position">编剧</h3>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
@@ -14,6 +27,7 @@
 <script>
 export default {
   name: 'StuffGallery',
+  props:['director', 'cast', 'writer'],
   data () {
     return {
       swiperOption: {
@@ -24,32 +38,7 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         }
-      },
-      stuffList: [{
-        name: '文牧野',
-        position: '导演',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }, {
-        name: '徐峥',
-        position: '饰 程勇',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }, {
-        name: '王传君',
-        position: '饰 吕受益',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }, {
-        name: '周一围',
-        position: '饰 曹斌',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }, {
-        name: '谭卓',
-        position: '饰 刘思慧',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }, {
-        name: '章宇',
-        position: '饰 黄毛彭浩',
-        imgUrl: 'http://img5.mtime.cn/ph/2018/08/20/193919.93463030_96X128.jpg'
-      }]
+      }
     }
   }
 }

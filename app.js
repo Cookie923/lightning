@@ -9,9 +9,6 @@ var logger = require('morgan');
 var mongoose = require('./config/mongoose');
 var db = mongoose();
 
-//引入Cookies；<=报错 500 没有Cookies这个构造函数
-// var Cookies = require('cookie');
-
 //引入登录模块
 var login = require('./routes/login');
 //首页

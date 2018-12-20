@@ -15,22 +15,34 @@
     </header>
     <div class="film-info-box">
       <div class="film-img">
-        <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2519070834.webp">
+        <img :src="this.filmImg">
       </div>
-      <div class="film-title">我不是药神</div>
+      <div class="film-title">{{this.filmInfo.title}}</div>
       <div class="film-info">
         <div>
-          <span>国家地区：中国大陆</span>
-          <span>类型：剧情/戏剧</span>
+          <span>{{this.filmInfo.original_title}}({{this.filmInfo.year}})</span>
         </div>
         <div>
-          <span>上映时间：2018-07-05(中国大陆)</span>
-          <span>电影片场：117分钟</span>
+          <span>国家地区：{{this.countries}}</span>
+          <span>类型：{{this.genres}}</span>
+        </div>
+        <div>
+          <span>上映时间：{{this.pubdates}}</span>
+        </div>
+        <div>
+          <span>语言：{{this.language}}</span>
+          <span>电影片场：{{this.durations}}</span>
         </div>
       </div>
       <div class="score-button">
-        <div class="score">豆瓣： 9.0</div>
-        <div class="score">IMDb： 8.2</div>
+        <div>
+          <span class="douban">豆瓣</span>
+          <span class="score">{{this.rating}}</span>
+        </div>
+        <!-- <div>
+          <span>IMDb</span>
+          <span class="score">暂无</span>
+        </div> -->
         <div class="button" v-if="rtype==0">想看</div>
         <div class="button button-on" v-if="rtype==1">已想看</div>
         <div class="button" v-if="rtype==0||rtype==1">看过</div>
@@ -40,12 +52,12 @@
     <div class="film-text">
       <div>
         <h3>简介</h3>
-        <p>普通中年男子程勇（徐峥 饰）经营着一家保健品店，失意又失婚。不速之客吕受益（王传君 饰）的到来，让他开辟了一条去印度买药做“代购”的新事业，虽然困难重重，但他在这条“买药之路”上发现了商机，一发不可收拾地做起了治疗慢粒白血病的 </p>
+        <p>{{this.filmInfo.summary}}</p>
       </div>
     </div>
     <div class="film-stuff">
       <h3>影人</h3>
-      <stuff-gallery></stuff-gallery>
+      <stuff-gallery :director="this.filmInfo.directors" :writer="this.filmInfo.writers" :cast="this.filmInfo.casts"></stuff-gallery>
     </div>
     <div class="film-comment-box">
       <h3>影评</h3>
@@ -57,6 +69,8 @@
 <script>
 import FilmComment from '.././components/FilmComment'
 import StuffGallery from './components/StuffGallery'
+import { getFilmDetail } from '../../api/film-in-theaters'
+
 export default {
   name: 'FilmDetails',
   components: {
@@ -65,14 +79,39 @@ export default {
   },
   data () {
     return {
-      rtype: 2, // 默认0 想看1 看过2
-      gallery_type: 1
+      rtype: 0, // 默认0 想看1 看过2
+      gallery_type: 1,
+      filmInfo: {},
+      countries: '',
+      filmImg: '',
+      genres: '',
+      pubdates: '',
+      durations: '',
+      language: '',
+      rating: 0
     }
   },
   methods: {
     back () {
       this.$router.go(-1)
     }
+  },
+  mounted () {
+    getFilmDetail(this.$route.query.id).then((res) => {
+      this.filmInfo = res
+      let countries = this.filmInfo.countries
+      let genres = this.filmInfo.genres
+      let pubdates = this.filmInfo.pubdates
+      let durations = this.filmInfo.durations
+      let language = this.filmInfo.languages
+      this.filmImg = this.filmInfo.images.small
+      this.genres = genres.join('/')
+      this.countries = countries.join(' / ')
+      this.pubdates = pubdates.join(' / ')
+      this.durations = durations.toString()
+      this.language = language.toString()
+      this.rating = this.filmInfo.rating.average
+    })
   }
 }
 </script>
@@ -122,9 +161,18 @@ export default {
         align-items: center
         height: 100%
         color: #f8f8f8
-        font-size: .27rem
+        margin-top: .3rem
+        font-size: .24rem
         .score
           margin-right: .3rem
+          font-size: .4rem
+          text-shadow: .05rem .05rem .1rem #000
+          color: #fff
+        .douban
+          padding: .03rem
+          border-radius: .1rem
+          background: #007722
+          font-weight: bold
         .button
           width: 1.5rem
           height: .5rem
@@ -140,10 +188,11 @@ export default {
       background: #2D445C
       color: #f8f8f8
       div
-        padding: .1rem .3rem .3rem
+        padding: .35rem .3rem .3rem
         p
           margin-top: .2rem
           font-size: .22rem
+          color: #ecf5ff
           line-height: .3rem
     .film-stuff
       margin-bottom: .3rem

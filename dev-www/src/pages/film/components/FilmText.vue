@@ -1,18 +1,19 @@
 <template>
   <div class="film-text">
-    <h3>"罗宾汉"扑"波西米亚""神奇动物2"海外热</h3>
+    <h3>{{detail.title}}</h3>
     <div class="resource">
-      <div>来源：时光网</div>
+      <div>
+        来源：
+        <a :href="detail.url">{{detail.source}}</a>
+        {{detail.time}}
+      </div>
       <div>
         <i class="iconfont">&#xe71f;</i>
       </div>
     </div>
     <div class="comment-text">
-      <p><b>时光网讯 </b>正值北美感恩节假期，北美票房市场也趁着节日档热闹起来，迪士尼动画新片《无敌破坏王2》将成这个感恩节票房的最大赢家。</p>
-      <p>影片开画首日拿下1030万美元票房，上映前五日（感恩节假期加上首周末）总票房预计将在8600万美元至9600万美元之间浮动，或能打破《冰雪奇缘》制造的9400万美元感恩节5日票房纪录。（《冰雪奇缘》的两位公主也在《无敌破坏王2》友情客串）</p>
-      <p>影片开画首日拿下1030万美元票房，上映前五日（感恩节假期加上首周末）总票房预计将在8600万美元至9600万美元之间浮动，或能打破《冰雪奇缘》制造的9400万美元感恩节5日票房纪录。（《冰雪奇缘》的两位公主也在《无敌破坏王2》友情客串）</p>
-      <p>影片开画首日拿下1030万美元票房，上映前五日（感恩节假期加上首周末）总票房预计将在8600万美元至9600万美元之间浮动，或能打破《冰雪奇缘》制造的9400万美元感恩节5日票房纪录。（《冰雪奇缘》的两位公主也在《无敌破坏王2》友情客串）</p>
-      <p>影片开画首日拿下1030万美元票房，上映前五日（感恩节假期加上首周末）总票房预计将在8600万美元至9600万美元之间浮动，或能打破《冰雪奇缘》制造的9400万美元感恩节5日票房纪录。（《冰雪奇缘》的两位公主也在《无敌破坏王2》友情客串）</p>
+      <p v-html="detail.content"></p>
+      (编辑：{{detail.editor}})
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@
 <script>
 export default {
   name: 'FilmText',
+  props: ['detail'],
   data () {
     return {
     }
@@ -43,13 +45,24 @@ export default {
       justify-content: space-between
       align-items: center
       font-size: .25rem
+      a
+        margin-right: .2rem
       .iconfont
         color: #2D445C
         // color: #FDB515
         font-size: .5rem
   .comment-text
-    text-indent: .5rem
     line-height: .5rem
+</style>
+
+<style lang="stylus">
+  .comment-text p
+    img
+      width: 100%
     b
       font-weight: bold
+    video
+      width: 100%
+    p
+      font-size: .23rem
 </style>

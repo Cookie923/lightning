@@ -4,7 +4,7 @@
       <div class="user-img">
         <img class="avatar" src="../../assets/img/lightning.png">
       </div>
-      <div class="user-name">用户名</div>
+      <div class="user-name">{{this.username}}</div>
     </div>
     <div class="user" v-if="sign!==1">
       <el-button class="button" type="warning" round @click="tologIn()">登录 / 注册</el-button>
@@ -35,7 +35,7 @@
 <script>
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
-import { deleteCookie } from '../../api/cookie.js'
+import { getCookie, deleteCookie } from '../../api/cookie.js'
 export default {
   name: 'Account',
   components: {
@@ -46,7 +46,8 @@ export default {
     return {
       tab: 4,
       value: false,
-      sign: 1
+      sign: 1,
+      username: JSON.parse(getCookie('userInfo')).username
     }
   },
   methods: {
