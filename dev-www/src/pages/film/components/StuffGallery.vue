@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'StuffGallery',
-  props:['director', 'cast', 'writer'],
+  props: ['director', 'cast', 'writer'],
   data () {
     return {
       swiperOption: {

@@ -1,37 +1,31 @@
 <template>
   <div class="billboard">
     <div class="title">
-      <h3>榜单名称</h3>
-      <span @click="jumpToList()">全部100部</span>
+      <h3>{{billboard.title}}</h3>
+      <span @click="jumpToList()">全部{{billboard.subjects&&billboard.subjects.length}}部</span>
     </div>
     <div class="gallery">
-      <router-link to="/film-details">
-        <div class="film">
-          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-          <div class="film-name-box">
-            <i class="iconfont">&#xe62c;</i>
-            <span class="film-name">毒液：致命守护者</span>
-          </div>
+      <div class="film" @click="jumpToDetail(billboard.subjects[0].subject.id)">
+        <img :src="billboard.subjects&&billboard.subjects[0].subject.images.small">
+        <div class="film-name-box">
+          <i class="iconfont">&#xe62c;</i>
+          <span class="film-name">{{billboard.subjects&&billboard.subjects[0].subject.title}}</span>
         </div>
-      </router-link>
-      <router-link to="/film-details">
-        <div class="film">
-          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-          <div class="film-name-box">
-            <i class="iconfont">&#xe62d;</i>
-            <span class="film-name">毒液：致命守护者</span>
-          </div>
+      </div>
+      <div class="film" @click="jumpToDetail(billboard.subjects[1].subject.id)">
+        <img :src="billboard.subjects&&billboard.subjects[1].subject.images.small">
+        <div class="film-name-box">
+          <i class="iconfont">&#xe62d;</i>
+          <span class="film-name">{{billboard.subjects&&billboard.subjects[1].subject.title}}</span>
         </div>
-      </router-link>
-      <router-link to="/film-details">
-        <div class="film">
-          <img src="http://img5.mtime.cn/mt/2018/10/17/085012.20600355_100X140X4.jpg">
-          <div class="film-name-box">
-            <i class="iconfont">&#xe630;</i>
-            <span class="film-name">毒液：致命守护者</span>
-          </div>
+      </div>
+      <div class="film"  @click="jumpToDetail(billboard.subjects[2].subject.id)">
+        <img :src="billboard.subjects&&billboard.subjects[2].subject.images.small">
+        <div class="film-name-box">
+          <i class="iconfont">&#xe630;</i>
+          <span class="film-name">{{billboard.subjects&&billboard.subjects[2].subject.title}}</span>
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +33,7 @@
 <script>
 export default {
   name: 'Billboard',
+  props: ['billboard'],
   data () {
     return {
     }
@@ -46,6 +41,11 @@ export default {
   methods: {
     jumpToList () {
       this.$router.push('/search/billboardlist')
+    },
+    jumpToDetail (id) {
+      this.$router.push({
+        path: `/film-details?id=${id}`
+      })
     }
   }
 }

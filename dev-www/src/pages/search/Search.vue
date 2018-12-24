@@ -6,8 +6,8 @@
         prefix-icon="el-icon-search">
       </el-input>
     </div>
-    <billboard></billboard>
-    <billboard></billboard>
+    <billboard :billboard="weeklyList"></billboard>
+    <billboard :billboard="usBillboard"></billboard>
     <bottom-tab :tab="tab"></bottom-tab>
   </div>
 </template>
@@ -15,6 +15,7 @@
 <script>
 import BottomTab from '.././components/BottomTab'
 import Billboard from './components/Billboard'
+import { weeklyBillboard, usBillboard } from '../../api/billboard'
 export default {
   name: 'Search',
   components: {
@@ -23,8 +24,18 @@ export default {
   },
   data () {
     return {
-      tab: 2
+      tab: 2,
+      weeklyList: {},
+      usBillboard: {}
     }
+  },
+  mounted () {
+    weeklyBillboard().then((res) => {
+      this.weeklyList = res
+    })
+    usBillboard().then((res) => {
+      this.usBillboard = res
+    })
   }
 }
 </script>
