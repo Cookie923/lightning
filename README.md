@@ -1,5 +1,5 @@
 # lightning
-> 一个基于vue2.0的电影web app项目
+> 一个基于vue2.0的:clapper:电影web app项目
 
 后端：Node.js
 服务器：express 4.16.4
@@ -13,8 +13,12 @@ mongoose
 + vue-calendar-component
 
 #### 已完成功能
-- :heavy_check_mark: 用户登录&注册
-- :heavy_check_mark: 修改密码
-- :heavy_check_mark: 电影资讯首页轮播
-- :heavy_check_mark: 电影资讯详情页
-- :heavy_check_mark: 院线热映
+:heavy_check_mark: 用户登录&注册  
+
+:heavy_check_mark: 修改密码  
+
+:heavy_check_mark: 电影资讯首页轮播  
+
+:heavy_check_mark: 电影资讯详情页  
+
+:heavy_check_mark: 院线热映  
