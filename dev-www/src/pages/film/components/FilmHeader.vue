@@ -42,6 +42,7 @@ export default {
     width: 100%
     height: .74rem
     padding: 0 .1rem
+    border: 0
     background: #f8f8f8
     text-align: center
     font-size: .35rem

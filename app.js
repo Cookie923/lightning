@@ -5,6 +5,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var proxy = require('http-proxy-middleware');
+var timesOptions = {
+	target: 'http://m.mtime.cn/Service/callback.mi/News/',
+	changeOrigin: true,
+	ws: true,
+	pathRewrite: {
+		'^/news': '/'
+	}
+};
+var doubanOptions = {
+	target: 'http://api.douban.com/v2',
+	changeOrigin: true,
+	ws: true,
+	pathRewrite: {
+		'^/api': ''
+	}
+};
+var timesProxy = proxy(timesOptions);
+var doubanProxy = proxy(doubanOptions);
+
 //引入数据库
 var mongoose = require('./config/mongoose');
 var db = mongoose();
@@ -26,7 +46,8 @@ app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
 //第三方接口转发
-
+app.use('/api', doubanProxy);
+app.use('/news', timesProxy);
 
 app.use(logger('dev'));
 app.use(express.json());
