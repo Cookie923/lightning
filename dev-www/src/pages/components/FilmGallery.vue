@@ -3,7 +3,7 @@
     <swiper :options="swiperOption">
       <swiper-slide v-for="item of theater" :key="item.id">
         <div @click="jumpToDetail(item.id)">
-          <img :src="item.images.small">
+          <img v-lazy="item.images.small">
           <h3 class="film-title">{{item.title}}</h3>
           <div class="douban-score" v-show="item.rating.average">
             豆瓣评分<span class="score">{{item.rating.average}}</span>

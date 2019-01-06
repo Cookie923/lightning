@@ -10,7 +10,7 @@
       <swiper :options="swiperOption">
         <swiper-slide v-for="item of newsList" :key="item.id">
           <div @click="toNewsDetails(item.id)">
-            <img class="swiper-img" :src="item.image?item.image:item.images[0].url1">
+            <img class="swiper-img" v-lazy="item.image?item.image:item.images[0].url1">
             <div class="news-title">
               <h3>{{item.title}}</h3>
               <span>{{item.title2}}</span>

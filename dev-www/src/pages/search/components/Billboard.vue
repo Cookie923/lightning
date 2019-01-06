@@ -6,21 +6,21 @@
     </div>
     <div class="gallery">
       <div class="film" @click="jumpToDetail(billboard.subjects[0].subject.id)">
-        <img :src="billboard.subjects&&billboard.subjects[0].subject.images.small">
+        <img v-lazy="billboard.subjects&&billboard.subjects[0].subject.images.small">
         <div class="film-name-box">
           <i class="iconfont">&#xe62c;</i>
           <span class="film-name">{{billboard.subjects&&billboard.subjects[0].subject.title}}</span>
         </div>
       </div>
       <div class="film" @click="jumpToDetail(billboard.subjects[1].subject.id)">
-        <img :src="billboard.subjects&&billboard.subjects[1].subject.images.small">
+        <img v-lazy="billboard.subjects&&billboard.subjects[1].subject.images.small">
         <div class="film-name-box">
           <i class="iconfont">&#xe62d;</i>
           <span class="film-name">{{billboard.subjects&&billboard.subjects[1].subject.title}}</span>
         </div>
       </div>
       <div class="film"  @click="jumpToDetail(billboard.subjects[2].subject.id)">
-        <img :src="billboard.subjects&&billboard.subjects[2].subject.images.small">
+        <img v-lazy="billboard.subjects&&billboard.subjects[2].subject.images.small">
         <div class="film-name-box">
           <i class="iconfont">&#xe630;</i>
           <span class="film-name">{{billboard.subjects&&billboard.subjects[2].subject.title}}</span>

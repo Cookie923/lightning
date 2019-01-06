@@ -15,7 +15,7 @@
     </header>
     <div class="film-info-box">
       <div class="film-img">
-        <img :src="this.filmImg">
+        <img v-lazy="this.filmImg">
       </div>
       <div class="film-title">{{this.filmInfo.title}}</div>
       <div class="film-info">
