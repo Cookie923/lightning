@@ -11,6 +11,7 @@ mongoose
 + element-ui
 + vue-awesome-swiper
 + vue-calendar-component
++ vue-lazyload
 
 #### 已完成功能
 :heavy_check_mark: 用户登录&注册  
@@ -18,3 +19,4 @@ mongoose
 :heavy_check_mark: 电影资讯首页轮播  
 :heavy_check_mark: 电影资讯详情页  
 :heavy_check_mark: 院线热映  
+:heavy_check_mark: 电影榜单  

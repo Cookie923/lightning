@@ -17,7 +17,7 @@ Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(ElementUI)
 Vue.use(VueAwesonmeSwiper)
-Vue.use(VueLazyload, {  
+Vue.use(VueLazyload, {
   loading: require('./assets/img/juice.gif')
 })
 

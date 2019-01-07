@@ -29,9 +29,17 @@ export default {
       newsInfo: {}// 影讯详情
     }
   },
+  methods: {
+    // 视频有防盗链处理 所以暂时删除video标签
+    videoRemove () {
+      var pattern = /<video\s+[^>]*><\/video>/
+      this.newsInfo.content = this.newsInfo.content.replace(pattern, '')
+    }
+  },
   mounted () {
     getNewsDetails(this.id).then((res) => {
       this.newsInfo = res
+      this.videoRemove()
     })
   }
 }

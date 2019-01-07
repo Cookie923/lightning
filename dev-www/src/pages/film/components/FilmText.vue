@@ -12,6 +12,7 @@
       </div>
     </div>
     <div class="comment-text">
+      <img v-if="detail.images" :src="detail.images && detail.images[1].url1">
       <p v-html="detail.content"></p>
       (编辑：{{detail.editor}})
     </div>
@@ -24,7 +25,10 @@ export default {
   props: ['detail'],
   data () {
     return {
+      content: ''
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -53,6 +57,8 @@ export default {
         font-size: .5rem
   .comment-text
     line-height: .5rem
+    img
+      width: 100%
 </style>
 
 <style lang="stylus">

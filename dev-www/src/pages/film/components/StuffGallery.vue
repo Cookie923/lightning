@@ -2,19 +2,19 @@
   <div class="stuff-gallery">
     <swiper :options="swiperOption">
       <swiper-slide v-for="item of director" :key="item.id">
-        <img class="avatar" v-lazy="item.avatars.small" >
+        <img class="avatar" v-lazy="replaceUrl(item.avatars.small)" >
         <h3 class="stuff-name">{{item.name}}</h3>
         <h3 class="stuff-name">{{item.name_en}}</h3>
         <h3 class="stuff-name s-position">导演</h3>
       </swiper-slide>
       <swiper-slide v-for="item of cast" :key="item.id">
-        <img class="avatar" v-lazy="item.avatars.small">
+        <img class="avatar" v-lazy="replaceUrl(item.avatars.small)">
         <h3 class="stuff-name">{{item.name}}</h3>
         <h3 class="stuff-name">{{item.name_en}}</h3>
         <h3 class="stuff-name s-position">演员</h3>
       </swiper-slide>
       <swiper-slide v-for="item of writer" :key="item.id">
-        <img class="avatar" v-lazy="item.avatars.small">
+        <img class="avatar" v-lazy="replaceUrl(item.avatars.small)">
         <h3 class="stuff-name">{{item.name}}</h3>
         <h3 class="stuff-name">{{item.name_en}}</h3>
         <h3 class="stuff-name s-position">编剧</h3>
@@ -38,6 +38,13 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         }
+      }
+    }
+  },
+  methods: {
+    replaceUrl (srcUrl) {
+      if (srcUrl !== undefined) { // 图片防盗链处理
+        return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
       }
     }
   }
