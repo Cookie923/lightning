@@ -2,14 +2,16 @@
   <div class="billboard-list">
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
-        榜单
+        {{this.$route.query.title}}
     </header>
-    <film-item></film-item>
+    <film-item :billboard="list"></film-item>
   </div>
 </template>
 
 <script>
 import FilmItem from './../components/FilmItem'
+import { weeklyBillboard, usBillboard } from '../../api/billboard'
+
 export default {
   name: 'BillboardList',
   components: {
@@ -17,11 +19,30 @@ export default {
   },
   data () {
     return {
+      list: {}
     }
   },
   methods: {
     back () {
       this.$router.go(-1)
+    },
+    weekly () {
+      weeklyBillboard().then((res) => {
+        this.list = res
+      })
+    },
+    us () {
+      usBillboard().then((res) => {
+        this.list = res
+      })
+    }
+  },
+  mounted () {
+    if (this.$route.query.title === '豆瓣电影本周口碑榜') {
+      this.weekly()
+    }
+    if (this.$route.query.title === '豆瓣电影北美票房榜') {
+      this.us()
     }
   }
 }

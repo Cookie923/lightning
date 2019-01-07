@@ -2,7 +2,7 @@
   <div class="billboard">
     <div class="title">
       <h3>{{billboard.title}}</h3>
-      <span @click="jumpToList()">全部{{billboard.subjects&&billboard.subjects.length}}部</span>
+      <span @click="jumpToList(billboard.title)">全部{{billboard.subjects&&billboard.subjects.length}}部</span>
     </div>
     <div class="gallery">
       <div class="film" @click="jumpToDetail(billboard.subjects[0].subject.id)">
@@ -39,8 +39,10 @@ export default {
     }
   },
   methods: {
-    jumpToList () {
-      this.$router.push('/search/billboardlist')
+    jumpToList (title) {
+      this.$router.push({
+        path: `/search/billboardlist?title=${title}`
+      })
     },
     jumpToDetail (id) {
       this.$router.push({
