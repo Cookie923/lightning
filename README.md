@@ -20,3 +20,4 @@ mongoose
 :heavy_check_mark: 电影资讯详情页  
 :heavy_check_mark: 院线热映  
 :heavy_check_mark: 电影榜单  
+:heavy_check_mark: 搜索功能 
