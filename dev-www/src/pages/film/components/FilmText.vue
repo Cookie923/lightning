@@ -1,7 +1,8 @@
 <template>
   <div class="film-text">
-    <h3>{{detail.title}}</h3>
-    <div class="resource">
+    <h3 v-if="detail">{{detail.title}}</h3>
+    <h3 v-if="review">{{review.title}}</h3>
+    <div class="resource" v-if="detail">
       <div>
         来源：
         <a :href="detail.url">{{detail.source}}</a>
@@ -11,10 +12,13 @@
         <i class="iconfont">&#xe71f;</i>
       </div>
     </div>
-    <div class="comment-text">
+    <div class="comment-text" v-if="detail">
       <img v-if="detail.images" :src="detail.images && detail.images[1].url1">
       <p v-html="detail.content"></p>
       (编辑：{{detail.editor}})
+    </div>
+    <div class="comment-text" v-if="review">
+      <p>{{review.content}}</p>
     </div>
   </div>
 </template>
@@ -22,7 +26,7 @@
 <script>
 export default {
   name: 'FilmText',
-  props: ['detail'],
+  props: ['detail', 'review'],
   data () {
     return {
       content: ''

@@ -21,3 +21,4 @@ mongoose
 :heavy_check_mark: 院线热映  
 :heavy_check_mark: 电影榜单  
 :heavy_check_mark: 搜索功能 
+:heavy_check_mark: 首页显示三条长影评

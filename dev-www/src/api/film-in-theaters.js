@@ -28,3 +28,29 @@ export function getFilmDetail (id) {
     console.log(err)
   })
 }
+
+export function getHotReview (id, count) {
+  const url = `/api/movie/subject/${id}/reviews`
+  const data = Object.assign({}, commonParams, {
+    count: count
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+
+export function getReviewDetail (id) {
+  const url = `/api/movie/review/${id}`
+  const data = Object.assign({}, commonParams)
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((err) => {
+    console.log(err)
+  })
+}

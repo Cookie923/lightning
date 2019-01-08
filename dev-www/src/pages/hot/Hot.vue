@@ -25,7 +25,7 @@
       <film-gallery :theater="theaterFilm"></film-gallery>
     </div>
     <div class="title title-text comment">热门影评</div>
-    <film-comment></film-comment>
+    <film-comment :comment="hotReviews"></film-comment>
     <bottom-tab :tab="tab"></bottom-tab>
   </div>
 </template>
@@ -35,7 +35,7 @@ import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
 import FilmComment from '.././components/FilmComment'
 import { getFilmNews } from '../../api/film-news'
-import { getFilmInTheaters } from '../../api/film-in-theaters'
+import { getFilmInTheaters, getHotReview } from '../../api/film-in-theaters'
 
 export default {
   name: 'Hot',
@@ -54,13 +54,24 @@ export default {
       },
       tab: 1,
       newsList: [],
-      theaterFilm: {}
+      theaterFilm: {},
+      hotFilmId: [],
+      hotReviews: []
     }
   },
   methods: {
     toNewsDetails (id) {
       this.$router.push({
         path: `/news-details?id=${id}`
+      })
+    },
+    getReview () {
+      this.hotFilmId.forEach((id) => {
+        getHotReview(id, 1).then((res) => {
+          if (res.reviews.length !== 0) {
+            this.hotReviews.push(res)
+          }
+        })
       })
     }
   },
@@ -71,6 +82,11 @@ export default {
     })
     getFilmInTheaters('北京', 0, 10).then((res) => {
       this.theaterFilm = res.subjects
+      this.theaterFilm.forEach((film) => {
+        this.hotFilmId.push(film.id)
+      })
+      this.hotFilmId.length = 4
+      this.getReview()
     })
   }
 }

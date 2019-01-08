@@ -1,23 +1,19 @@
 <template>
   <div class="film-comment">
-    <div class="comment" v-for="item in 3" :key="item" @click="jumpToDetails()">
+    <div class="comment" v-for="item in comment" :key="item.reviews[0].id" @click="jumpToDetails(item.reviews[0].id)">
       <div class="comment-details">
         <div class="user">
-          <div class="user-img"></div>
-          用户名称
+          <img class="user-img" :src="item.reviews[0].author.avatar">
+          {{item.reviews[0].author.name}}
         </div>
         <div class="comment-text">
-          <h3 class="comment-title">标题</h3>
-          <span>简略内容影评</span>
+          <h3 class="comment-title">{{item.reviews&&item.reviews[0].title}}</h3>
+          <div>{{item.reviews&&item.reviews[0].summary}}</div>
         </div>
         <div class="comment-data">
           <span class="iconfont">&#xe71b;</span>8
           <span class="iconfont">&#xe66b;</span>12
         </div>
-      </div>
-      <div class="comment-image">
-        <img src="">
-        tu
       </div>
     </div>
   </div>
@@ -26,56 +22,56 @@
 <script>
 export default {
   name: 'FilmComment',
+  props: ['comment'],
   data () {
     return {}
   },
   methods: {
-    jumpToDetails () {
-      this.$router.push('/comment-details')
+    jumpToDetails (id) {
+      this.$router.push(`/comment-details?id=${id}`)
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+  @import '../../assets/styles/mixins.styls'
   .film-comment
     margin: .1rem
     .comment
       display: flex
-      height: 2.2rem
+      height: 2.8rem
       justify-content: space-between
       border-bottom: .03rem solid #f8f8f8
       .comment-details
         margin: .2rem
         .user
           width: 100%
-          height: .4rem
-          line-height: .4rem
-          font-size: .23rem
+          height: .5rem
+          line-height: .5rem
+          font-size: .26rem
           .user-img
             float: left
-            width: .4rem
-            height: .4rem
-            border-radius: .4rem
+            width: .5rem
+            height: .5rem
+            border-radius: .5rem
+            border: .01rem solid #f8f8f8
             margin-right: .1rem
-            background: #333
       .comment-title
-        margin: .1rem 0
+        margin: .2rem 0
         font-size: .28rem
         font-weight: bold
+        ellipsis()
       .comment-text
         height: 50%
-        span
-          font-size: .25rem
+        div
+          font-size: .23rem
+          line-height: .3rem
+          color: #777
+          ellipsis2()
       .comment-data
-        position: relative
-        bottom: 0
-      .comment-image
-        width: 2.4rem
-        height: 1.6rem
-        margin: .2rem
-        border-radius: .1rem
-        background: #333
+        margin-top: .3rem
+        float: right
   .comment:last-child
     margin-bottom: .9rem
 </style>
