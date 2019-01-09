@@ -1,6 +1,7 @@
 <template>
   <div class="film-comment">
-    <div class="comment" v-for="item in comment" :key="item.reviews[0].id" @click="jumpToDetails(item.reviews[0].id)">
+    <!-- 首页热门影评 -->
+    <div class="comment comment-hot" v-if="comment" v-for="item in comment" :key="item.reviews[0].id" @click="jumpToDetails(item.reviews[0].id)">
       <div class="comment-details">
         <div class="user">
           <img class="user-img" :src="item.reviews[0].author.avatar">
@@ -16,13 +17,34 @@
         </div>
       </div>
     </div>
+    <!-- 电影页热门影评 -->
+    <div class="comment" v-if="comments" v-for="item in comments" :key="item.id" @click="jumpToDetails(item.id)">
+      <div class="comment-details">
+        <div class="user">
+          <img class="user-img" :src="item.author.avatar">
+          {{item.author.name}}
+          <el-rate
+            class="rate-box"
+            v-model="item.rating.value"
+            disabled
+            text-color="#ff9900"
+            >
+          </el-rate>
+        </div>
+        <div class="comment-text">
+          <p class="comment-title">{{item.title}}</p>
+          <div>{{item.summary}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-num">全部影评{{commentnum}}个</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'FilmComment',
-  props: ['comment'],
+  props: ['comment', 'comments', 'commentnum'],
   data () {
     return {}
   },
@@ -38,9 +60,10 @@ export default {
   @import '../../assets/styles/mixins.styls'
   .film-comment
     margin: .1rem
+    .comment.comment-hot
+      height: 3rem
     .comment
       display: flex
-      height: 2.8rem
       justify-content: space-between
       border-bottom: .03rem solid #f8f8f8
       .comment-details
@@ -57,6 +80,9 @@ export default {
             border-radius: .5rem
             border: .01rem solid #f8f8f8
             margin-right: .1rem
+        .rate-box
+          display: inline-block
+          margin-left: .3rem
       .comment-title
         margin: .2rem 0
         font-size: .28rem
@@ -64,14 +90,20 @@ export default {
         ellipsis()
       .comment-text
         height: 50%
+        line-height: .34rem
         div
           font-size: .23rem
           line-height: .3rem
           color: #777
           ellipsis2()
       .comment-data
-        margin-top: .3rem
+        margin-top: .4rem
         float: right
+  .comment-num
+    margin-top: .2rem
+    text-align: center
+    font-size: .25rem
+    color: #FDB515
   .comment:last-child
     margin-bottom: .9rem
 </style>

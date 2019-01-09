@@ -1,5 +1,6 @@
 <template>
   <div class="film-details">
+    <mark-dialog></mark-dialog>
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
       <span>电影</span>
@@ -61,7 +62,7 @@
     </div>
     <div class="film-comment-box">
       <h3>影评</h3>
-      <film-comment :gtype="gallery_type"></film-comment>
+      <film-comment :comments="filmInfo.popular_reviews" :commentnum="filmInfo.reviews_count"></film-comment>
     </div>
   </div>
 </template>
@@ -69,13 +70,15 @@
 <script>
 import FilmComment from '.././components/FilmComment'
 import StuffGallery from './components/StuffGallery'
+import MarkDialog from './components/MarkDialog'
 import { getFilmDetail } from '../../api/film-in-theaters'
 
 export default {
   name: 'FilmDetails',
   components: {
     FilmComment,
-    StuffGallery
+    StuffGallery,
+    MarkDialog
   },
   data () {
     return {

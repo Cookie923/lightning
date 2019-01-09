@@ -64,6 +64,8 @@ export default {
       deleteCookie('userInfo')
       this.sign = 0
     }
+  },
+  mounted () {
   }
 }
 </script>
