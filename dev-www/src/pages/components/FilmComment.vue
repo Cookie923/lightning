@@ -6,6 +6,7 @@
         <div class="user">
           <img class="user-img" :src="item.reviews[0].author.avatar">
           {{item.reviews[0].author.name}}
+          <span class="source">《{{item.subject.title}}》的影评</span>
         </div>
         <div class="comment-text">
           <h3 class="comment-title">{{item.reviews&&item.reviews[0].title}}</h3>
@@ -37,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="comment-num">全部影评{{commentnum}}个</div>
+    <div v-if="comments" class="comment-num">全部影评{{commentnum}}个</div>
   </div>
 </template>
 
@@ -80,6 +81,17 @@ export default {
             border-radius: .5rem
             border: .01rem solid #f8f8f8
             margin-right: .1rem
+          .source
+            position: absolute
+            right: 0
+            padding-right: .1rem
+            padding-left: .1rem
+            background: #FDB515
+            opacity: 0.7
+            border-top-left-radius: .3rem
+            border-bottom-left-radius: .3rem
+            font-size: .2rem
+            color: #fff
         .rate-box
           display: inline-block
           margin-left: .3rem

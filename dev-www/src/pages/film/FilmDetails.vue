@@ -1,6 +1,6 @@
 <template>
   <div class="film-details">
-    <mark-dialog></mark-dialog>
+    <mark-dialog @openDialog="dialogShow" v-show="dialog" @rtype="rtypeChange" :rtype="rtype"></mark-dialog>
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
       <span>电影</span>
@@ -44,10 +44,10 @@
           <span>IMDb</span>
           <span class="score">暂无</span>
         </div> -->
-        <div class="button" v-if="rtype==0">想看</div>
-        <div class="button button-on" v-if="rtype==1">已想看</div>
-        <div class="button" v-if="rtype==0||rtype==1">看过</div>
-        <div class="button button-on" v-if="rtype==2">已看过</div>
+        <div class="button" v-if="rtype==0" @click="wanted">想看</div>
+        <div class="button button-on" v-if="rtype==1" @click="openDialog">已想看</div>
+        <div class="button" v-if="rtype==0" @click="watched">看过</div>
+        <div class="button button-on" v-if="rtype==2" @click="openDialog">已看过</div>
       </div>
     </div>
     <div class="film-text">
@@ -55,6 +55,17 @@
         <h3>简介</h3>
         <p>{{this.filmInfo.summary}}</p>
       </div>
+    </div>
+    <div class="my-comment" v-if="rtype==2">
+      <h3>我的影评</h3>
+      <el-rate
+          class="rate-box"
+          v-model="myRating"
+          disabled
+          text-color="#ff9900"
+          >
+        </el-rate>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, voluptatibus corrupti animi id nihil minus natus obcaecati tempora distinctio, ad repellendus dolore ratione voluptate, provident quod velit consequatur tempore voluptatem.</p>
     </div>
     <div class="film-stuff">
       <h3>影人</h3>
@@ -91,12 +102,29 @@ export default {
       pubdates: '',
       durations: '',
       language: '',
-      rating: 0
+      rating: 0,
+      dialog: false,
+      myRating: 5
     }
   },
   methods: {
     back () {
       this.$router.go(-1)
+    },
+    dialogShow (msg) {
+      this.dialog = msg
+    },
+    watched () {
+      this.dialog = true
+    },
+    rtypeChange (count) {
+      this.rtype = count
+    },
+    openDialog () {
+      this.dialog = true
+    },
+    wanted () {
+      this.rtype = 1
     }
   },
   mounted () {
@@ -197,6 +225,20 @@ export default {
           font-size: .22rem
           color: #ecf5ff
           line-height: .3rem
+    .my-comment
+      position: relative
+      margin: .1rem
+      background: #ededed
+      border-radius: .15rem
+      h3
+        padding: .3rem .3rem .1rem .3rem
+        font-weight: bold
+      .rate-box
+        position: absolute
+        top: .2rem
+        right: .1rem
+      p
+        padding: 0rem .3rem .2rem
     .film-stuff
       margin-bottom: .3rem
       h3

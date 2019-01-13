@@ -13,6 +13,7 @@
       <div class="review-user" v-if="review">
         <img :src="review.author&&review.author.avatar">
         <a :href="review.alt">{{review.author&&review.author.name}}</a>
+        <span class="status">看过</span>
         <el-rate
           class="rate-box"
           v-model="review.rating.value"
@@ -74,8 +75,13 @@ export default {
       font-size: .25rem
       .review-user
         height: 1rem
+        .status
+          color: #777
+          font-size: .2rem
+          margin-right: .1rem
         .rate-box
           display: inline-block
+          line-height: .2rem
         img
           width: .6rem
           height: .6rem
