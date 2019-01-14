@@ -24,3 +24,7 @@ mongoose
 :heavy_check_mark: 首页显示三条长影评  
 :heavy_check_mark: 电影详情页影评  
 :heavy_check_mark: 标记电影对话框  
+:heavy_check_mark: 查询观影记录接口  
+:heavy_check_mark: “看过”电影接口  
+:heavy_check_mark: “想看”电影接口  
+:heavy_check_mark: 删除观影记录接口  

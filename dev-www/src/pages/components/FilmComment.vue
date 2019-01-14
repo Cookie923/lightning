@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div v-if="comments" class="comment-num">全部影评{{commentnum}}个</div>
+    <div v-if="comments" class="comment-num">该片豆瓣前十热门影评</div>
   </div>
 </template>
 

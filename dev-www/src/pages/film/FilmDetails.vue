@@ -82,7 +82,9 @@
 import FilmComment from '.././components/FilmComment'
 import StuffGallery from './components/StuffGallery'
 import MarkDialog from './components/MarkDialog'
+import { mapMutations } from 'vuex'
 import { getFilmDetail } from '../../api/film-in-theaters'
+import { inquireView } from '../../api/film-viewrecord'
 
 export default {
   name: 'FilmDetails',
@@ -93,7 +95,6 @@ export default {
   },
   data () {
     return {
-      rtype: 0, // 默认0 想看1 看过2
       gallery_type: 1,
       filmInfo: {},
       countries: '',
@@ -107,6 +108,11 @@ export default {
       myRating: 5
     }
   },
+  computed: {
+    rtype () {
+      return this.$store.state.curFilmRtype
+    }
+  },
   methods: {
     back () {
       this.$router.go(-1)
@@ -118,16 +124,20 @@ export default {
       this.dialog = true
     },
     rtypeChange (count) {
-      this.rtype = count
+      this.setMovieRtype(count)
     },
     openDialog () {
       this.dialog = true
     },
     wanted () {
-      this.rtype = 1
-    }
+      this.setMovieRtype(1)
+    },
+    ...mapMutations({
+      setMovieRtype: 'SET_MOVIE_RTYPE'
+    })
   },
   mounted () {
+    inquireView(this.$store.state.username, this.$route.query.id)
     getFilmDetail(this.$route.query.id).then((res) => {
       this.filmInfo = res
       let countries = this.filmInfo.countries
@@ -144,7 +154,7 @@ export default {
       this.rating = this.filmInfo.rating.average
     })
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>

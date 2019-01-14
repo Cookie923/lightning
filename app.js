@@ -32,6 +32,9 @@ var db = mongoose();
 
 //引入登录模块
 var login = require('./routes/login');
+
+var viewrecord = require('./routes/viewrecord');
+
 //首页
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -59,6 +62,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 //注册函数：登录模块
 app.use('/',login);
+
+app.use('/',viewrecord);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

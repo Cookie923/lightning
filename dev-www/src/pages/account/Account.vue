@@ -36,6 +36,7 @@
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
 import { getCookie, deleteCookie } from '../../api/cookie.js'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Account',
   components: {
@@ -63,9 +64,15 @@ export default {
     quitlogin () {
       deleteCookie('userInfo')
       this.sign = 0
-    }
+    },
+    ...mapMutations({
+      setUsername: 'SET_USERNAME'
+    })
   },
   mounted () {
+    if (this.sign === 1) {
+      this.setUsername(this.username)
+    }
   }
 }
 </script>
