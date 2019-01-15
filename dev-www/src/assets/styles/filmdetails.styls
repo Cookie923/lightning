@@ -1,0 +1,103 @@
+.film-details
+  .title
+    display: flex
+    justify-content: space-between
+    height: .74rem
+    padding: 0 .1rem
+    background: #2d445c
+    text-align: center
+    font-size: .35rem
+    color: #fff
+    line-height: .74rem
+    .iconfont
+      font-size: .4rem
+      color: #fff
+  .film-info-box
+    display: flex
+    flex-flow: column
+    align-items: center
+    height: 6.4rem
+    background: #2D445C
+    .film-img img
+      width: 3rem
+      height: 4.2rem
+      border-radius: .2rem
+      box-shadow: .05rem .05rem 1rem #000
+    .film-title
+      margin: .2rem 0 .1rem
+      color: #fff
+      font-size: .35rem
+    .film-info
+      color: #949494
+      text-align: center
+      font-size: .22rem
+      div span
+        display: inline-block
+        margin: .03rem .05rem
+    .score-button
+      display: flex
+      align-items: center
+      height: 100%
+      color: #f8f8f8
+      margin-top: .3rem
+      font-size: .24rem
+      .score
+        margin-right: .3rem
+        font-size: .4rem
+        text-shadow: .05rem .05rem .1rem #000
+        color: #fff
+      .douban
+        padding: .03rem
+        border-radius: .1rem
+        background: #007722
+        font-weight: bold
+      .button
+        width: 1.5rem
+        height: .5rem
+        margin-left: .3rem
+        background: #FDB515
+        border-radius: .1rem
+        line-height: .5rem
+        text-align: center
+      .button-on
+        opacity: .5
+  .film-text
+    width: 100%
+    background: #2D445C
+    color: #f8f8f8
+    div
+      padding: .35rem .3rem .3rem
+      p
+        margin-top: .2rem
+        font-size: .22rem
+        color: #ecf5ff
+        line-height: .3rem
+  .my-comment
+    position: relative
+    margin: .1rem
+    background: #ededed
+    border-radius: .15rem
+    h3
+      padding: .3rem .3rem .1rem .3rem
+      font-weight: bold
+    .rate-box
+      position: absolute
+      top: .2rem
+      right: .1rem
+    p
+      padding: .1rem .3rem .4rem
+      font-size: .24rem
+      color: #777
+  .film-stuff
+    margin-bottom: .3rem
+    h3
+      padding: .3rem .3rem .1rem .3rem
+      font-weight: bold
+  .film-comment-box
+    margin: .1rem
+    padding: .2rem
+    background: #33333317
+    border-radius: .15rem
+    h3
+      color: #333
+      font-weight: bold

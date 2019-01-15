@@ -119,6 +119,7 @@ router.post('/film/viewrecord',function(req,res){
       res.json(responseData);
       return;
     }
+    console.log(doc)
     responseData.code = 4;
     responseData.rtype = 0;
     responseData.message = '这个电影还没有标记过！';
@@ -127,6 +128,7 @@ router.post('/film/viewrecord',function(req,res){
   });
 });
 
+/* 删除记录 */
 router.post('/film/viewrecord/delete',function(req,res){
   var username = req.body.username;
   var filmid = req.body.filmid;

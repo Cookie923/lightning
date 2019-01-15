@@ -1,6 +1,12 @@
 <template>
   <div class="film-details">
-    <mark-dialog @openDialog="dialogShow" v-show="dialog" @rtype="rtypeChange" :rtype="rtype"></mark-dialog>
+    <mark-dialog 
+      @openDialog="dialogShow" 
+      v-show="dialog" 
+      @rtype="rtypeChange" 
+      :rtype="rtype"
+      :filmInfo="filmInfo"
+    ></mark-dialog>
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
       <span>电影</span>
@@ -65,7 +71,7 @@
           text-color="#ff9900"
           >
         </el-rate>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, voluptatibus corrupti animi id nihil minus natus obcaecati tempora distinctio, ad repellendus dolore ratione voluptate, provident quod velit consequatur tempore voluptatem.</p>
+      <p>{{myComment}}</p>
     </div>
     <div class="film-stuff">
       <h3>影人</h3>
@@ -82,9 +88,9 @@
 import FilmComment from '.././components/FilmComment'
 import StuffGallery from './components/StuffGallery'
 import MarkDialog from './components/MarkDialog'
-import { mapMutations } from 'vuex'
+// import { mapMutations } from 'vuex'
 import { getFilmDetail } from '../../api/film-in-theaters'
-import { inquireView } from '../../api/film-viewrecord'
+import { inquireView, wantedFilm } from '../../api/film-viewrecord'
 
 export default {
   name: 'FilmDetails',
@@ -95,6 +101,7 @@ export default {
   },
   data () {
     return {
+      rtype: 0, //默认0 想看1 看过2
       gallery_type: 1,
       filmInfo: {},
       countries: '',
@@ -105,14 +112,20 @@ export default {
       language: '',
       rating: 0,
       dialog: false,
-      myRating: 5
+      myRating: 0,
+      myComment: ''
     }
   },
-  computed: {
-    rtype () {
-      return this.$store.state.curFilmRtype
+  watch: {
+    dialog () {
+      this.inquireViewrecord()
     }
   },
+  // computed: {
+  //   rtype () {
+  //     return this.$store.state.curFilmRtype
+  //   }
+  // },
   methods: {
     back () {
       this.$router.go(-1)
@@ -124,20 +137,35 @@ export default {
       this.dialog = true
     },
     rtypeChange (count) {
-      this.setMovieRtype(count)
+      this.rtype = count
     },
     openDialog () {
       this.dialog = true
     },
     wanted () {
-      this.setMovieRtype(1)
+      let username = this.$store.state.username
+      let filmid = this.$route.query.id
+      let filminfo = this.filmInfo
+      wantedFilm(username, filmid, filminfo).then((res) => {
+        this.rtype = res.rtype
+      })
     },
-    ...mapMutations({
-      setMovieRtype: 'SET_MOVIE_RTYPE'
-    })
+    inquireViewrecord () {
+      var that = this
+      inquireView(that.$store.state.username, that.$route.query.id).then((res) => {
+        that.rtype = res.rtype
+        if (that.rtype === 2) {
+          that.myComment = res.comment
+          that.myRating = res.rating
+        }
+      })
+    }
+    // ...mapMutations({
+    //   setUsername: 'SET_USERNAME'
+    // })
   },
   mounted () {
-    inquireView(this.$store.state.username, this.$route.query.id)
+    this.inquireViewrecord()
     getFilmDetail(this.$route.query.id).then((res) => {
       this.filmInfo = res
       let countries = this.filmInfo.countries
@@ -158,108 +186,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import "../../assets/styles/filmdetails.styls"
   >>>.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover
     background-color: #f8f4ec
     color: #FDB515
-  .film-details
-    .title
-      display: flex
-      justify-content: space-between
-      height: .74rem
-      padding: 0 .1rem
-      background: #2d445c
-      text-align: center
-      font-size: .35rem
-      color: #fff
-      line-height: .74rem
-      .iconfont
-        font-size: .4rem
-        color: #fff
-    .film-info-box
-      display: flex
-      flex-flow: column
-      align-items: center
-      height: 6.4rem
-      background: #2D445C
-      .film-img img
-        width: 3rem
-        height: 4.2rem
-        border-radius: .2rem
-        box-shadow: .05rem .05rem 1rem #000
-      .film-title
-        margin: .2rem 0 .1rem
-        color: #fff
-        font-size: .35rem
-      .film-info
-        color: #949494
-        text-align: center
-        font-size: .22rem
-        div span
-          display: inline-block
-          margin: .03rem .05rem
-      .score-button
-        display: flex
-        align-items: center
-        height: 100%
-        color: #f8f8f8
-        margin-top: .3rem
-        font-size: .24rem
-        .score
-          margin-right: .3rem
-          font-size: .4rem
-          text-shadow: .05rem .05rem .1rem #000
-          color: #fff
-        .douban
-          padding: .03rem
-          border-radius: .1rem
-          background: #007722
-          font-weight: bold
-        .button
-          width: 1.5rem
-          height: .5rem
-          margin-left: .3rem
-          background: #FDB515
-          border-radius: .1rem
-          line-height: .5rem
-          text-align: center
-        .button-on
-          opacity: .5
-    .film-text
-      width: 100%
-      background: #2D445C
-      color: #f8f8f8
-      div
-        padding: .35rem .3rem .3rem
-        p
-          margin-top: .2rem
-          font-size: .22rem
-          color: #ecf5ff
-          line-height: .3rem
-    .my-comment
-      position: relative
-      margin: .1rem
-      background: #ededed
-      border-radius: .15rem
-      h3
-        padding: .3rem .3rem .1rem .3rem
-        font-weight: bold
-      .rate-box
-        position: absolute
-        top: .2rem
-        right: .1rem
-      p
-        padding: 0rem .3rem .2rem
-    .film-stuff
-      margin-bottom: .3rem
-      h3
-        padding: .3rem .3rem .1rem .3rem
-        font-weight: bold
-    .film-comment-box
-      margin: .1rem
-      padding: .2rem
-      background: #33333317
-      border-radius: .15rem
-      h3
-        color: #333
-        font-weight: bold
 </style>

@@ -35,9 +35,10 @@
 </template>
 
 <script>
+import { watchedFilm, wantedFilm, deleteRecord } from '../../../api/film-viewrecord'
 export default {
   name: 'MarkDialog',
-  props: ['rtype'],
+  props: ['rtype','filmInfo'],
   data () {
     return {
       rating: null,
@@ -55,17 +56,34 @@ export default {
       this.changeBox = true
     },
     confirm () {
+      let username = this.$store.state.username
+      let filmid = this.$route.query.id
+      let filminfo = this.filmInfo
+      let rating = this.rating
+      let comment = this.comment
       if (this.radio === '1') {
-        this.$emit('rtype', 1)
         this.$emit('openDialog', false)
+        wantedFilm(username, filmid, filminfo).then((res) => {
+          this.$emit('rtype', res.rtype)
+        })
         return
       }
-      this.$emit('rtype', 2)
       this.$emit('openDialog', false)
+      watchedFilm(username, filmid, rating, comment, filminfo).then((res) => {
+        this.$emit('rtype', res.rtype)
+      })
     },
     deleteState () {
+      let username = this.$store.state.username
+      let filmid = this.$route.query.id
       this.$emit('rtype', 0)
       this.$emit('openDialog', false)
+      deleteRecord(username, filmid).then((res) => {
+        this.$message({
+          message: '已删除成功！',
+          type: 'success'
+        })
+      })
     }
   },
   mounted () {

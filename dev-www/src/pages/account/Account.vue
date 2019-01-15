@@ -12,6 +12,7 @@
     <div class="title">
       观影记录
       <el-switch
+        @change="change"
         v-if="sign==1"
         class="switch"
         v-model="value"
@@ -21,7 +22,18 @@
         inactive-color="#FDB515">
       </el-switch>
     </div>
-    <film-gallery v-if="sign==1" class="film-gallery" :tab="tab"></film-gallery>
+    <film-gallery 
+      v-if="sign==1&&!value" 
+      class="film-gallery" 
+      :tab="tab"
+      :theater="wantedList">
+    </film-gallery>
+    <film-gallery 
+      v-if="sign==1&&value" 
+      class="film-gallery" 
+      :tab="tab"
+      :theater="watchedList">
+    </film-gallery>
     <div class="title" @click="jumpTocollection()">我的收藏</div>
     <div class="title">我的影评</div>
     <bottom-tab :tab="tab"></bottom-tab>
@@ -36,6 +48,7 @@
 import FilmGallery from '.././components/FilmGallery'
 import BottomTab from '.././components/BottomTab'
 import { getCookie, deleteCookie } from '../../api/cookie.js'
+import { wantedAllFilm, watchedAllFilm } from '../../api/account-viewrecord.js'
 import { mapMutations } from 'vuex'
 export default {
   name: 'Account',
@@ -46,12 +59,22 @@ export default {
   data () {
     return {
       tab: 4,
-      value: false,
+      value: false,// 想看false 看过true
       sign: 1,
-      username: JSON.parse(getCookie('userInfo')).username
+      username: JSON.parse(getCookie('userInfo')).username,
+      wantedList: [],
+      watchedList: []
     }
   },
   methods: {
+    change (val) {
+      if (val) {
+        this.watchedList = []
+        watchedAllFilm(this.username).then((res) => {
+          res.data.forEach(film => this.watchedList.push(film.filminfo))
+        })
+      }
+    },
     jumpTocollection () {
       this.$router.push('/account/mycollection')
     },
@@ -72,6 +95,9 @@ export default {
   mounted () {
     if (this.sign === 1) {
       this.setUsername(this.username)
+      wantedAllFilm(this.username).then((res) => {
+        res.data.forEach(film => this.wantedList.push(film.filminfo))
+      })
     }
   }
 }

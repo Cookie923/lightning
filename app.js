@@ -32,9 +32,10 @@ var db = mongoose();
 
 //引入登录模块
 var login = require('./routes/login');
-
+//引入电影详情页观影记录模块
 var viewrecord = require('./routes/viewrecord');
-
+//引入用户中心观影记录模块
+var accountrecord = require('./routes/account-record');
 //首页
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -62,9 +63,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 //注册函数：登录模块
 app.use('/',login);
-
+//电影详情页观影记录模块
 app.use('/',viewrecord);
-// app.use('/users', usersRouter);
+//用户中心观影记录模块
+app.use('/',accountrecord);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
