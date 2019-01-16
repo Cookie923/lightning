@@ -3,7 +3,7 @@
     <div class="search-details">
       <div class="film-item" v-for="film of searchResult.subjects" :key="film.id" @click="jumpToDetail(film.id)">
         <div>
-          <img v-lazy="film.images.small">
+          <img v-lazy="replaceUrl(film.images.small)">
         </div>
         <div class="detail-box">
           <h3>{{film.title}}</h3>
@@ -33,11 +33,11 @@ export default {
     }
   },
   methods: {
-    // replaceUrl (srcUrl) {
-    //   if (srcUrl !== undefined) { // 图片防盗链处理
-    //     return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
-    //   }
-    // }
+    replaceUrl (srcUrl) {
+      if (srcUrl !== undefined) { // 图片防盗链处理
+        return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
+      }
+    },
     jumpToDetail (id) {
       this.$router.push({
         path: `/film-details?id=${id}`

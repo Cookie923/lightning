@@ -1,7 +1,13 @@
 <template>
   <div class="film-list">
-    <div class="film-item" v-for="film of billboard.subjects" :key="film.subject.id" @click="back(film.subject.id)">
-      <img class="film-img" v-lazy="film.subject.images.small"/>
+    <!-- 电影榜单 -->
+    <div
+      v-if="!type"
+      class="film-item" 
+      v-for="film of (billboard&&billboard.subjects)" 
+      :key="film.subject.id" 
+      @click="back(film.subject.id)">
+      <img class="film-img" v-lazy="replaceUrl(film.subject.images.small)"/>
       <div class="film-info">
         <h3>{{film.subject.title}}</h3>
         <div class="score">
@@ -21,15 +27,83 @@
       </div>
       <div class="rank" :class="{'rank-one':film.rank==1,'rank-two':film.rank==2,'rank-three':film.rank==3}">No.{{film.rank}}</div>
     </div>
+    <!-- 想看电影 -->
+    <div
+      v-if="type=='wanted'"
+      class="film-item" 
+      v-for="film of list" 
+      :key="film.filmid" 
+      @click="back(film.filmid)">
+      <img class="film-img" v-lazy="replaceUrl(film.filminfo.images.small)"/>
+      <div class="film-info">
+        <h3>{{film.filminfo.title}}</h3>
+        <div class="score">
+          <span class="director">导演：{{film.filminfo.directors[0].name}}</span>
+          <span class="director">
+            <span class="douban">豆瓣</span>
+            <span class="rate">{{film.filminfo.rating.average}}</span>
+          </span>
+        </div>
+        <div class="details">
+          <span>类型：</span>
+          <span class="genres" v-for="genres of film.filminfo.genres" :key="genres.id">{{genres}}</span>
+        </div>
+        <div class="duration">
+          <span>片长：{{film.filminfo.durations[0]}}</span>
+        </div>
+        <div class="comment" v-if="type=='wanted'">
+          <span class="create-time">{{film.create_time}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- 看过电影 -->
+    <div
+      v-if="type=='watched'"
+      class="film-item" 
+      v-for="film of list" 
+      :key="film.filmid" 
+      @click="back(film.filmid)">
+      <img class="film-img" v-lazy="replaceUrl(film.filminfo.images.small)"/>
+      <div class="film-info">
+        <h3>{{film.filminfo.title}}</h3>
+        <div class="score">
+          <span class="director">导演：{{film.filminfo.directors[0].name}}</span>
+          <span class="director">
+            <span class="douban">豆瓣</span>
+            <span class="rate">{{film.filminfo.rating.average}}</span>
+          </span>
+        </div>
+        <div class="details">
+          <span>类型：</span>
+          <span class="genres" v-for="genres of film.filminfo.genres" :key="genres.id">{{genres}}</span>
+        </div>
+        <div class="duration">
+          <span>片长：{{film.filminfo.durations[0]}}</span>
+        </div>
+        <div class="comment" v-if="type=='watched'">
+          <div class="rate-box">
+            <el-rate
+            v-model="film.rating"
+            disabled
+            text-color="#ff9900"
+            >
+            </el-rate>
+          </div>
+          <span class="create-time">{{film.create_time}}</span>
+          <p>{{film.comment}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'FilmItem',
-  props: ['billboard'],
+  props: ['billboard', 'list'],
   data () {
     return {
+      type: this.$route.query.type,
     }
   },
   methods: {
@@ -37,12 +111,19 @@ export default {
       this.$router.push({
         path: `/film-details?id=${id}`
       })
+    },
+    replaceUrl (srcUrl) {
+      if (srcUrl !== undefined) { // 图片防盗链处理
+        return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
+  >>> .el-rate__icon
+    font-size: .2rem 
   .film-list
     margin: .84rem .1rem
     .film-item
@@ -101,4 +182,17 @@ export default {
         background: #ef760c
       .rank-three
         background: #fced21
+      .comment
+        width: 4rem
+        margin-top: .2rem
+        padding: .1rem .1rem .2rem
+        background: #fffafa
+        border-radius: .1rem
+        font-size: .24rem
+        color: #777
+        .rate-box
+          width: 55%
+          display: inline-block
+        .create-time
+          font-size: .2rem
 </style>

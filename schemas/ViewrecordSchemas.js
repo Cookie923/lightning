@@ -14,7 +14,9 @@ var ViewrecordSchema = new Schema({
 	// 用户影评
 	comment: String,
 	// 电影信息
-	filminfo: Object
+	filminfo: Object,
+	// 创建时间
+	create_time: String
 });
 
 module.exports = ViewrecordSchema;

@@ -2,15 +2,16 @@
   <div class="my-list">
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
-        想看
+        {{this.$route.query.type=='wanted'?'我想看的电影':'我看过的电影'}}
     </header>
-    <film-item></film-item>
+    <film-item v-if="type == 'wanted'" :list="wantedList"></film-item>
+    <film-item v-if="type == 'watched'" :list="watchedList"></film-item>
   </div>
 </template>
 
 <script>
 import FilmItem from './../components/FilmItem'
-
+import { wantedAllFilm, watchedAllFilm } from '../../api/account-viewrecord.js'
 export default {
   name: 'MyList',
   components: {
@@ -18,11 +19,25 @@ export default {
   },
   data () {
     return {
+      type: this.$route.query.type,
+      wantedList: [],
+      watchedList: []
     }
   },
   methods: {
     back () {
       this.$router.go(-1)
+    }
+  },
+  mounted () {
+    if (this.$route.query.type === 'wanted') {
+      wantedAllFilm(this.$store.state.username).then((res) => {
+        this.wantedList = res.data
+      })
+    }else if (this.$route.query.type === 'watched') {
+      watchedAllFilm(this.$store.state.username).then((res) => {
+        this.watchedList = res.data
+      })
     }
   }
 }

@@ -26,12 +26,14 @@
       v-if="sign==1&&!value" 
       class="film-gallery" 
       :tab="tab"
+      :type="1"
       :theater="wantedList">
     </film-gallery>
     <film-gallery 
       v-if="sign==1&&value" 
       class="film-gallery" 
       :tab="tab"
+      :type="2"
       :theater="watchedList">
     </film-gallery>
     <div class="title" @click="jumpTocollection()">我的收藏</div>

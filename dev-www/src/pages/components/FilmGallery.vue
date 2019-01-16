@@ -3,7 +3,7 @@
     <swiper :options="swiperOption">
       <swiper-slide v-for="item of theater" :key="item.id">
         <div @click="jumpToDetail(item.id)">
-          <img v-lazy="item.images.small">
+          <img v-lazy="replaceUrl(item.images.small)">
           <h3 class="film-title">{{item.title}}</h3>
           <div class="douban-score" v-show="item.rating.average">
             豆瓣评分<span class="score">{{item.rating.average}}</span>
@@ -24,7 +24,7 @@
 <script>
 export default {
   name: 'FilmGallery',
-  props: ['tab', 'theater'],
+  props: ['tab', 'theater', 'type'],
   data () {
     return {
       swiperOption: {
@@ -40,12 +40,21 @@ export default {
   },
   methods: {
     jumpToList () {
-      this.$router.push('/account/mylist')
+      if (this.type === 1) {
+        this.$router.push('/account/mylist?type=wanted')
+      }else if (this.type === 2) {
+        this.$router.push('/account/mylist?type=watched')
+      }
     },
     jumpToDetail (id) {
       this.$router.push({
         path: `/film-details?id=${id}`
       })
+    },
+    replaceUrl (srcUrl) {
+      if (srcUrl !== undefined) { // 图片防盗链处理
+        return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
+      }
     }
   }
 }

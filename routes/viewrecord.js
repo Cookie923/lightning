@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var moment = require('moment');
 //引入model
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -14,6 +15,7 @@ router.use(function (req, res, next) {
     rtype: 0,
     rating: 0,
     comment: '',
+    date: moment().format('YYYY-MM-DD HH:mm'),
     message: ''
   };
   next();
@@ -46,7 +48,8 @@ router.post('/film/viewrecord/wanted', function(req, res){
       rating: 0,
       rtype: 1,
       comment: '',
-      filminfo: filminfo
+      filminfo: filminfo,
+      create_time: moment().format('YYYY-MM-DD HH:mm')
     });
     viewrecord.save();
     responseData.code = 1;
@@ -71,7 +74,8 @@ router.post('/film/viewrecord/watched', function(req, res){
   },{$set: {
     rtype: 2,
     rating: rating,
-    comment: comment
+    comment: comment,
+    create_time: moment().format('YYYY-MM-DD HH:mm')
   }},function(err, doc){
     if(doc.nModified === 1){
       responseData.code = 2;
@@ -88,7 +92,8 @@ router.post('/film/viewrecord/watched', function(req, res){
       rating: rating,
       rtype: 2,
       comment: comment,
-      filminfo: filminfo
+      filminfo: filminfo,
+      create_time: moment().format('YYYY-MM-DD HH:mm')
     });
     viewrecord.save();
     responseData.code = 2;

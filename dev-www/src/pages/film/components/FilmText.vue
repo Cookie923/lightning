@@ -25,7 +25,7 @@
         <span class="time">{{review.updated_at}}</span>
       </div>
       <div>
-        <i class="iconfont">&#xe71f;</i>
+        <i class="iconfont" :class="{'collected':collected}" @click="collectedButtom()">&#xe71f;</i>
       </div>
     </div>
     <div class="comment-text" v-if="detail">
@@ -47,14 +47,18 @@ export default {
   props: ['detail', 'review'],
   data () {
     return {
-      content: ''
+      content: '',
+      collected: false
     }
   },
   methods: {
+    collectedButtom () {
+      this.collected = !this.collected
+    }
   },
   mounted () {
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -95,8 +99,10 @@ export default {
         margin-right: .2rem
       .iconfont
         color: #2D445C
-        // color: #FDB515
         font-size: .5rem
+      .collected
+        animation: collected-zoom
+        color: #FDB515
   .comment-text
     line-height: .5rem
     .desc
@@ -109,6 +115,13 @@ export default {
       color: #FDB515
     img
       width: 100%
+  @keyframes collected-zoom
+    0%
+      transform: scale(0)
+    50%
+      transform: scale(1.1)
+    100%
+      transform: scale(1)
 </style>
 
 <style lang="stylus">
