@@ -36,6 +36,8 @@ var login = require('./routes/login');
 var viewrecord = require('./routes/viewrecord');
 //引入用户中心观影记录模块
 var accountrecord = require('./routes/account-record');
+//引入用户中心我的收藏模块
+var accountcollection = require('./routes/account-collection');
 //引入收藏模块
 var collection = require('./routes/collection');
 //首页
@@ -69,6 +71,8 @@ app.use('/',login);
 app.use('/',viewrecord);
 //用户中心观影记录模块
 app.use('/',accountrecord);
+//用户中心我的收藏模块
+app.use('/',accountcollection);
 //文章收藏模块
 app.use('/',collection);
 

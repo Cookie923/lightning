@@ -25,3 +25,16 @@ export function watchedAllFilm (username) {
     console.log(err)
   })
 }
+
+export function myCollection (username) {
+  const url = '/account/collection'
+  return axios.get(url,{
+    params: {
+      username: username
+    }
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((err) => {
+    console.log(err)
+  })
+}

@@ -39,22 +39,51 @@
       </div>
     </div>
     <div v-if="comments" class="comment-num">该片豆瓣前十热门影评</div>
+    <!-- 用户收藏 -->
+    <div class="comment" v-if="collection" v-for="item in collection" :key="item.aid" @click="jumpToDetails(item.aid,item.atype)">
+      <div class="comment-details" v-if="item.atype!=='news'">
+        <div class="user">
+          <img class="user-img" :src="item.articleinfo.author.avatar">
+          {{item.articleinfo.author.name}}
+          <span class="source">豆瓣影评</span>
+        </div>
+        <div class="comment-text">
+          <h3 class="comment-title">{{item.articleinfo&&item.articleinfo.title}}</h3>
+          <div>{{item.articleinfo&&item.articleinfo.summary}}</div>
+        </div>
+        <div class="comment-data">
+          <span class="iconfont">&#xe71b;</span>8
+          <span class="iconfont">&#xe66b;</span>12
+        </div>
+      </div>
+      <div class="comment-details" v-if="item.atype=='news'">
+        <span class="timez">时光网新闻</span>
+        <div class="comment-text">
+          <h3 class="comment-title">{{item.articleinfo&&item.articleinfo.title}}</h3>
+          <div>{{item.articleinfo&&item.articleinfo.title2}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'FilmComment',
-  props: ['comment', 'comments', 'commentnum'],
+  props: ['comment', 'comments', 'commentnum', 'collection'],
   data () {
     return {}
   },
   methods: {
-    jumpToDetails (id) {
-      this.$router.push(`/comment-details?id=${id}`)
+    jumpToDetails (id, type) {
+      if (type=='news') {
+        this.$router.push(`/news-details?id=${id}`)
+      } else {
+        this.$router.push(`/comment-details?id=${id}`)
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -108,6 +137,19 @@ export default {
           line-height: .3rem
           color: #777
           ellipsis2()
+      .timez
+        position: absolute
+        right: 0
+        height: .5rem
+        line-height: .5rem
+        padding-right: .1rem
+        padding-left: .1rem
+        background: #FDB515
+        opacity: 0.7
+        border-top-left-radius: .3rem
+        border-bottom-left-radius: .3rem
+        font-size: .2rem
+        color: #fff
       .comment-data
         margin-top: .4rem
         float: right
