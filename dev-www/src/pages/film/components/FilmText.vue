@@ -25,7 +25,7 @@
         <span class="time">{{review.updated_at}}</span>
       </div>
       <div>
-        <i class="iconfont" :class="{'collected':collected}" @click="collectedButtom()">&#xe71f;</i>
+        <i class="iconfont" :class="{'collected':collect}" @click="collectedButtom()">&#xe71f;</i>
       </div>
     </div>
     <div class="comment-text" v-if="detail">
@@ -42,21 +42,47 @@
 </template>
 
 <script>
+import { inquireActicle, addCollection, cancelCollection } from '../../../api/article-collection'
 export default {
   name: 'FilmText',
   props: ['detail', 'review'],
   data () {
     return {
       content: '',
-      collected: false
+      collect: false
     }
   },
   methods: {
     collectedButtom () {
-      this.collected = !this.collected
+      let atype = this.$props.detail?'news':'doubancomment'
+      if (this.$props.review) {
+        if (this.collect === false) {
+          this.collect = true
+          addCollection(this.$store.state.username, atype, this.$route.query.id, this.$props.review)
+        } else if (this.collect) {
+          this.collect = false
+          cancelCollection(this.$store.state.username, this.$route.query.id)
+        }
+      } else if (this.$props.detail) {
+        if (this.collect === false) {
+          this.collect = true
+          addCollection(this.$store.state.username, atype, this.$route.query.id, this.$props.detail)
+        } else if (this.collect) {
+          this.collect = false
+          cancelCollection(this.$store.state.username, this.$route.query.id)
+        }
+      }
     }
   },
   mounted () {
+    inquireActicle(this.$store.state.username,this.$route.query.id).then((res) => {
+      if (res.code == 1) {
+        this.collect = true
+      } else {
+        this.collect = false
+      }
+    })
+    
   }
 };
 </script>

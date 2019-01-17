@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// 观影记录结构
+// 观影记录模型 
 var ViewrecordSchema = new Schema({
 	// 用户名
 	username: String,

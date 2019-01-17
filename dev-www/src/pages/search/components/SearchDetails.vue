@@ -44,7 +44,7 @@ export default {
       })
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -54,6 +54,7 @@ export default {
     opacity: 0
   .search-details
     padding-top: .1rem
+    margin-bottom: .9rem
     .film-item
       display: flex
       height: 1.8rem

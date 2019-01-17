@@ -36,6 +36,8 @@ var login = require('./routes/login');
 var viewrecord = require('./routes/viewrecord');
 //引入用户中心观影记录模块
 var accountrecord = require('./routes/account-record');
+//引入收藏模块
+var collection = require('./routes/collection');
 //首页
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -67,6 +69,8 @@ app.use('/',login);
 app.use('/',viewrecord);
 //用户中心观影记录模块
 app.use('/',accountrecord);
+//文章收藏模块
+app.use('/',collection);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

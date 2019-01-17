@@ -37,6 +37,12 @@ module.exports = {
             pathRewrite: {
                 '^/film': '/film'
             }
+        },
+        '/article': {
+            target: 'http://localhost:3000/',
+            pathRewrite: {
+                '^/article': '/article'
+            }
         }
     },
 

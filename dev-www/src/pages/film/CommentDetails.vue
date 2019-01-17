@@ -13,6 +13,7 @@ import FilmText from './components/FilmText'
 import FilmFeatures from './components/FilmFeatures'
 import CommentList from './components/CommentList'
 import { getReviewDetail } from '../../api/film-in-theaters'
+
 export default {
   name: 'CommentDetails',
   components: {
@@ -24,6 +25,7 @@ export default {
   data () {
     return {
       title: '影评',
+      collected: '',
       commentContent: {}
     }
   },
