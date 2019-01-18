@@ -22,7 +22,7 @@
     </header>
     <div class="film-info-box">
       <div class="film-img">
-        <img v-lazy="this.filmImg">
+        <img v-lazy="replaceUrl(this.filmImg)">
       </div>
       <div class="film-title">{{this.filmInfo.title}}</div>
       <div class="film-info">
@@ -127,6 +127,11 @@ export default {
   //   }
   // },
   methods: {
+    replaceUrl (srcUrl) {
+      if (srcUrl !== undefined) { // 图片防盗链处理
+        return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''))
+      }
+    },
     back () {
       this.$router.go(-1)
     },

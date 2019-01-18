@@ -23,7 +23,7 @@ router.get('/account/viewrecord/wanted', function(req, res){
   Viewrecord.find({
     username: username,
     rtype: 1
-  },function(err, doc){
+  }).sort({'create_time': -1}).exec(function(err,doc){
     responseData.code = 1;
     responseData.rtype = 1;
     responseData.data = doc;
@@ -38,7 +38,7 @@ router.get('/account/viewrecord/watched', function(req, res){
   Viewrecord.find({
     username: username,
     rtype: 2
-  },function(err, doc){
+  }).sort({'create_time': -1}).exec(function(err,doc){
     responseData.code = 1;
     responseData.rtype = 2;
     responseData.data = doc;

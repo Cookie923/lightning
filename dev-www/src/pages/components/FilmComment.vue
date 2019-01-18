@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div v-if="comments" class="comment-num">该片豆瓣前十热门影评</div>
+    <div v-if="comments" class="comment-num">{{comments.length==0?'暂无豆瓣影评哟~':'该片豆瓣前十热门影评'}}</div>
     <!-- 用户收藏 -->
     <div class="comment" v-if="collection" v-for="item in collection" :key="item.aid" @click="jumpToDetails(item.aid,item.atype)">
       <div class="comment-details" v-if="item.atype!=='news'">
@@ -46,6 +46,7 @@
           <img class="user-img" :src="item.articleinfo.author.avatar">
           {{item.articleinfo.author.name}}
           <span class="source">豆瓣影评</span>
+          <span class="create-time">{{item.create_time}}</span>
         </div>
         <div class="comment-text">
           <h3 class="comment-title">{{item.articleinfo&&item.articleinfo.title}}</h3>
@@ -58,6 +59,7 @@
       </div>
       <div class="comment-details" v-if="item.atype=='news'">
         <span class="timez">时光网新闻</span>
+        <span class="timez-time">{{item.create_time}}</span>
         <div class="comment-text">
           <h3 class="comment-title">{{item.articleinfo&&item.articleinfo.title}}</h3>
           <div>{{item.articleinfo&&item.articleinfo.title2}}</div>
@@ -121,11 +123,17 @@ export default {
             border-bottom-left-radius: .3rem
             font-size: .2rem
             color: #fff
+          .create-time
+            position: absolute
+            right: 0.2rem
+            margin-top: 2rem
+            color: #777
+            font-size: .16rem
         .rate-box
           display: inline-block
           margin-left: .3rem
       .comment-title
-        margin: .2rem 0
+        margin: .25rem 0 .2rem
         font-size: .28rem
         font-weight: bold
         ellipsis()
@@ -150,6 +158,12 @@ export default {
         border-bottom-left-radius: .3rem
         font-size: .2rem
         color: #fff
+      .timez-time
+        position: absolute
+        right: 0.2rem
+        margin-top: 1rem
+        color: #777
+        font-size: .16rem
       .comment-data
         margin-top: .4rem
         float: right

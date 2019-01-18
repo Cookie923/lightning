@@ -1,6 +1,19 @@
 <template>
   <div class="activity">
     <header class="title">动态</header>
+    <div v-for='(dynamic, index) of userDynamics' :key="dynamic._id">
+      <div class="msg" v-if="dynamic.rtype">
+        <div class="comment-details">
+          <div class="user-img"></div>
+          {{dynamic.username}}
+          <span>{{dynamic.rtype&&dynamic.rtype==1?'想看':'看过'}}</span>
+          <router-link to="/film-details">
+            <span>《{{dynamic.filminfo&&dynamic.filminfo.title}}》</span>
+          </router-link>
+          <span class="time">{{time[index]}}</span>
+        </div>
+      </div>
+    </div>
     <div class="msg comment" @click="jumpToDetails()">
       <div class="comment-details">
         <div class="user-img"></div>
@@ -18,34 +31,15 @@
         <span class="iconfont">&#xe66b;</span>12
       </div>
     </div>
-    <div class="msg">
-      <div class="comment-details">
-        <div class="user-img"></div>
-        用户名称
-        <span>想看</span>
-        <router-link to="/film-details">
-          <span>《你好，之华》</span>
-        </router-link>
-        <span class="time">2天前</span>
-      </div>
-    </div>
-    <div class="msg">
-      <div class="comment-details">
-        <div class="user-img"></div>
-        用户名称
-        <span>看过</span>
-        <router-link to="/film-details">
-          <span>《毒液：致命守护者》</span>
-        </router-link>
-        <span class="time">11天前</span>
-      </div>
-    </div>
     <bottom-tab :tab="tab"></bottom-tab>
   </div>
 </template>
 
 <script>
 import BottomTab from '.././components/BottomTab'
+import { userDynamic } from '../../api/dynamic'
+const m = require('moment')
+m.locale('zh-cn')
 export default {
   name: 'Activity',
   components: {
@@ -53,15 +47,31 @@ export default {
   },
   data () {
     return {
-      tab: 3
+      tab: 3,
+      username: this.$store.state.username,
+      userDynamics: [],
+      time: []
     }
   },
   methods: {
     jumpToDetails () {
       this.$router.push('/comment-details')
     }
+  },
+  mounted () {
+    if (this.username !== '') {
+      userDynamic(this.username).then((res) => {
+        this.userDynamics = res.data
+        let now
+        this.userDynamics.forEach(time => {
+          now = m(time.create_time,'YYYY-MM-DD HH:mm').fromNow()
+          now = now.replace(/\s+/g,"")
+          this.time.push(now)
+        })
+      })
+    }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>

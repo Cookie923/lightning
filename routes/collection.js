@@ -5,7 +5,7 @@ var moment = require('moment');
 //引入model
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var Collection = require('../models/Collection.js');
+var Collection = require('../models/Viewrecord.js');
 
 var responseData;
 
@@ -49,6 +49,7 @@ router.post('/article/collection', function(req, res){
 
   var collection = new Collection({
     username: username,
+    type: 'collection',
     aid: aid,
     atype: atype,
     articleinfo: articleinfo,

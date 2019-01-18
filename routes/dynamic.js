@@ -4,26 +4,26 @@ var router = express.Router();
 //引入model
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var Collection = require('../models/Viewrecord.js');
+
+var Viewrecord = require('../models/Viewrecord.js');
 
 var responseData;
 
 router.use(function(req, res, next) {
   responseData = {
+    count: 0,
     data: []
   };
   next();
 });
 
-/* 我的收藏 */
-router.get('/account/collection', function(req, res){
+/* 用户动态 */
+router.get('/account/dynamic', function(req, res){
   var username = req.query.username;
-  Collection.find({
-    username: username,
-    type: 'collection'
-  }).sort({'create_time': -1}).exec(function(err,doc){
+  Viewrecord.find({}).sort({'create_time': -1}).limit(20).exec(function(err,doc){
+    responseData.count = 20;
     responseData.data = doc;
-    res.json(responseData)
+    res.json(responseData);
     return;
   });
 });

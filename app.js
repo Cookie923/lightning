@@ -40,6 +40,8 @@ var accountrecord = require('./routes/account-record');
 var accountcollection = require('./routes/account-collection');
 //引入收藏模块
 var collection = require('./routes/collection');
+//引入动态模块
+var dynamic = require('./routes/dynamic');
 //首页
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -75,6 +77,8 @@ app.use('/',accountrecord);
 app.use('/',accountcollection);
 //文章收藏模块
 app.use('/',collection);
+//用户动态模块
+app.use('/',dynamic);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
