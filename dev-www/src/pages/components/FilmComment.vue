@@ -12,10 +12,10 @@
           <h3 class="comment-title">{{item.reviews&&item.reviews[0].title}}</h3>
           <div>{{item.reviews&&item.reviews[0].summary}}</div>
         </div>
-        <div class="comment-data">
+       <!--  <div class="comment-data">
           <span class="iconfont">&#xe71b;</span>8
           <span class="iconfont">&#xe66b;</span>12
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- 电影页热门影评 -->
@@ -43,8 +43,8 @@
     <div class="comment" v-if="collection" v-for="item in collection" :key="item.aid" @click="jumpToDetails(item.aid,item.atype)">
       <div class="comment-details" v-if="item.atype!=='news'">
         <div class="user">
-          <img class="user-img" :src="item.articleinfo.author.avatar">
-          {{item.articleinfo.author.name}}
+          <img class="user-img" :src="item.articleinfo&&item.articleinfo.author.avatar">
+          {{item.articleinfo&&item.articleinfo.author.name}}
           <span class="source">豆瓣影评</span>
           <span class="create-time">{{item.create_time}}</span>
         </div>
@@ -52,10 +52,10 @@
           <h3 class="comment-title">{{item.articleinfo&&item.articleinfo.title}}</h3>
           <div>{{item.articleinfo&&item.articleinfo.summary}}</div>
         </div>
-        <div class="comment-data">
+        <!-- <div class="comment-data">
           <span class="iconfont">&#xe71b;</span>8
           <span class="iconfont">&#xe66b;</span>12
-        </div>
+        </div> -->
       </div>
       <div class="comment-details" v-if="item.atype=='news'">
         <span class="timez">时光网新闻</span>
@@ -66,13 +66,36 @@
         </div>
       </div>
     </div>
+    <!-- 动态：用户收藏 -->
+    <div class="comment collection" v-if="collections" @click="jumpToDetails(collections.aid,collections.atype)">
+      <div class="comment-details" v-if="collections.atype!=='news'">
+        <div class="user">
+          <img class="user-img" :src="collections.articleinfo&&collections.articleinfo.author.avatar">
+          {{collections.articleinfo&&collections.articleinfo.author.name}}
+          <span class="source">豆瓣影评</span>
+          <span class="create-time">{{collections.create_time}}</span>
+        </div>
+        <div class="comment-text">
+          <h3 class="comment-title">{{collections.articleinfo&&collections.articleinfo.title}}</h3>
+          <div>{{collections.articleinfo&&collections.articleinfo.summary}}</div>
+        </div>
+      </div>
+      <div class="comment-details" v-if="collections.atype=='news'">
+        <span class="timez">时光网新闻</span>
+        <span class="timez-time">{{collections.create_time}}</span>
+        <div class="comment-text">
+          <h3 class="comment-title">{{collections.articleinfo&&collections.articleinfo.title}}</h3>
+          <div>{{collections.articleinfo&&collections.articleinfo.title2}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'FilmComment',
-  props: ['comment', 'comments', 'commentnum', 'collection'],
+  props: ['comment', 'comments', 'commentnum', 'collection', 'collections'],
   data () {
     return {}
   },
@@ -94,6 +117,10 @@ export default {
     margin: .1rem
     .comment.comment-hot
       height: 3rem
+    .comment.collection
+      border-bottom: 0
+      .comment-details
+        margin: 0
     .comment
       display: flex
       justify-content: space-between
@@ -174,4 +201,6 @@ export default {
     color: #FDB515
   .comment:last-child
     margin-bottom: .9rem
+  .collection:last-child
+    margin-bottom: 0
 </style>
