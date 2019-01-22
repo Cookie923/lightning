@@ -1,12 +1,12 @@
 <template>
   <div class="film-features">
     <div class="input">
-      <el-input v-model="input" placeholder="输入评论"></el-input>
+      <el-input v-model="input" placeholder="输入评论" :disabled="disabledButtom"></el-input>
     </div>
     <div class="features">
       <span v-show="!input" class="iconfont">&#xe66b;</span>
       <span v-show="!input">{{commentcounts}}</span>
-      <div class="button" v-show="input" @click="addComments('news')">发送</div>
+      <div class="button" v-show="input" @click="addComments('news')" :disabled="disabledButtom">发送</div>
     </div>
   </div>
 </template>
@@ -19,7 +19,8 @@ export default {
   props: ['commentcounts'],
   data () {
     return {
-      input: ''
+      input: '',
+      disabledButtom: true
     }
   },
   methods:{
@@ -36,6 +37,11 @@ export default {
           this.$emit('setComment', res)
         })
       }
+    }
+  },
+  mounted () {
+    if(this.$store.state.username !== ''){
+      this.disabledButtom = false
     }
   }
 };

@@ -1,39 +1,42 @@
 <template>
   <div class="activity">
     <header class="title">动态</header>
-    <div v-for='(dynamic, index) of userDynamics' :key="dynamic._id">
-      <div class="msg" v-if="dynamic.rtype">
-        <div class="comment-details">
-          <img class="user-img" src="../../../src/assets/img/lightning.png">
-          {{dynamic.username}}
-          <span>{{dynamic.rtype&&dynamic.rtype==1?'想看':'看过'}}</span>
-          <span @click="jumpToDetails(dynamic.filmid,dynamic.rtype)">《{{dynamic.filminfo&&dynamic.filminfo.title}}》</span>
-          <span class="time">{{time[index]}}</span>
-          <div class="user-comment" v-if="dynamic.rtype==2">
-            <el-rate
-              class="rate-box"
-              v-model="dynamic.rating"
-              disabled
-              text-color="#ff9900"
-              >
-            </el-rate>
-            <p>{{dynamic.comment}}</p>
+    <div class="box">
+      <div v-for='(dynamic, index) of userDynamics' :key="dynamic._id">
+        <div class="msg" v-if="dynamic.rtype">
+          <div class="comment-details">
+            <img class="user-img" src="../../../src/assets/img/lightning.png">
+            {{dynamic.username}}{{dynamic.username==$store.state.username?'(我)':''}}
+            <span>{{dynamic.rtype&&dynamic.rtype==1?'想看':'看过'}}</span>
+            <span @click="jumpToDetails(dynamic.filmid,dynamic.rtype)">《{{dynamic.filminfo&&dynamic.filminfo.title}}》</span>
+            <span class="time">{{time[index]}}</span>
+            <div class="user-comment" v-if="dynamic.rtype==2">
+              <el-rate
+                class="rate-box"
+                v-model="dynamic.rating"
+                disabled
+                text-color="#ff9900"
+                >
+              </el-rate>
+              <p>{{dynamic.comment}}</p>
+            </div>
+            <activity-comment-list :infoname="dynamic.username" :infoid="dynamic.filmid"></activity-comment-list>
           </div>
         </div>
-      </div>
-      <div class="msg comment" v-if="dynamic.atype">
-        <div class="comment-details">
-          <img class="user-img" src="../../../src/assets/img/lightning.png">
-          {{dynamic.username}}
-          <span>收藏了</span>
-          <span class="time">{{time[index]}}</span>
-          <div class="user-comment" @click="jumpToDetails(dynamic.aid,dynamic.atype)">
-            <film-comment :collections="dynamic"></film-comment>
+        <div class="msg comment" v-if="dynamic.atype">
+          <div class="comment-details">
+            <img class="user-img" src="../../../src/assets/img/lightning.png">
+            {{dynamic.username}}{{dynamic.username==$store.state.username?'(我)':''}}
+            <span>收藏了</span>
+            <span class="time">{{time[index]}}</span>
+            <div class="user-comment" @click="jumpToDetails(dynamic.aid,dynamic.atype)">
+              <film-comment :collections="dynamic"></film-comment>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="msg" v-if="userDynamics.length==0">
+    <div class="msg hint" v-if="userDynamics.length==0">
       <el-button class="button" round @click="tologIn()">登录 / 注册</el-button>
       <span class="tips">站长提示：登录后才可以查看lightning内动态哟~ヾ(･ω･`｡)</span>
     </div>
@@ -42,6 +45,7 @@
 </template>
 
 <script>
+import ActivityCommentList from './ActivityCommentList'
 import FilmComment from '../components/FilmComment'
 import BottomTab from '.././components/BottomTab'
 import { userDynamic } from '../../api/dynamic'
@@ -50,6 +54,7 @@ m.locale('zh-cn')
 export default {
   name: 'Activity',
   components: {
+    ActivityCommentList,
     FilmComment,
     BottomTab
   },
@@ -106,8 +111,10 @@ export default {
       color: #2D445C
       line-height: .74rem
     .msg
-      padding: .4rem .25rem
-      border-bottom: .2rem solid #f8f8f8
+      padding: .3rem .25rem .15rem
+      border-bottom: .1rem solid #f8f8f8
+    .hint
+     border-bottom: .1rem solid #fff
     .comment-details
       width: 100%
       margin-bottom: .15rem
@@ -159,6 +166,6 @@ export default {
     background: #fffafa
     color: #FDB515
     font-size: .2rem
-  // .msg:last-child
-  //   margin-bottom: .9rem
+  .box
+     margin-bottom: .9rem
 </style>

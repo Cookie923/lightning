@@ -3,7 +3,7 @@
     <div class="comment-box" v-for="(item,index) of list" :key="item._id">
       <div class="user-detail">
         <img class="img" src='../../../../src/assets/img/lightning.png'>
-        <span class="name">{{item.publisher==$store.state.username?'我':item.publisher}}</span>
+        <span class="name">{{item.publisher}}{{item.publisher==$store.state.username?'(我)':''}}</span>
         <span class="time">{{item.create_time|moment("from")}}</span>
         <span class="time" v-show="item.publisher==$store.state.username" @click="deleteMyComment(item._id,index)">删除</span>
       </div>

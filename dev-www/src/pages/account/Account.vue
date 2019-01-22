@@ -37,7 +37,6 @@
       :theater="watchedList">
     </film-gallery>
     <div class="title" @click="jumpTocollection()">我的收藏</div>
-    <div class="title">我的影评</div>
     <bottom-tab :tab="tab"></bottom-tab>
     <div class="button-box" v-if="sign==1">
       <el-button class="button" type="warning" round @click="jumpToPassword()">修改密码</el-button>
