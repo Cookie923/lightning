@@ -2,8 +2,8 @@
   <div class="news-details">
     <film-header :title="title"></film-header>
     <film-text :detail="newsInfo"></film-text>
-    <comment-list></comment-list>
-    <film-features></film-features>
+    <comment-list :newComment="comment" @commentcount="commentcount"></comment-list>
+    <film-features @setComment="setComment" :commentcounts="count"></film-features>
   </div>
 </template>
 
@@ -26,7 +26,10 @@ export default {
     return {
       title: '影讯',
       id: this.$route.query.id,
-      newsInfo: {}// 影讯详情
+      newsInfo: {},// 影讯详情
+      source_type: 'news',
+      comment: {},
+      count: 0
     }
   },
   methods: {
@@ -34,13 +37,20 @@ export default {
     videoRemove () {
       var pattern = /<video\s+[^>]*><\/video>/
       this.newsInfo.content = this.newsInfo.content.replace(pattern, '')
+    },
+    setComment (data) {
+      this.comment = data.data
+    },
+    commentcount (count) {
+      this.count = count
     }
   },
   mounted () {
     getNewsDetails(this.id).then((res) => {
       this.newsInfo = res
       this.videoRemove()
-    })
+    }),
+    this.commentcount()
   }
 }
 </script>

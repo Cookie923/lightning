@@ -24,3 +24,5 @@ mongoose
 :heavy_check_mark: 首页显示三条长影评  
 :heavy_check_mark: 电影详情页影评  
 :heavy_check_mark: 观影记录功能  
+:heavy_check_mark: 用户动态  
+:heavy_check_mark: 影讯评论功能  

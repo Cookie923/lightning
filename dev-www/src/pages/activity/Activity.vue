@@ -4,7 +4,7 @@
     <div v-for='(dynamic, index) of userDynamics' :key="dynamic._id">
       <div class="msg" v-if="dynamic.rtype">
         <div class="comment-details">
-          <div class="user-img"></div>
+          <img class="user-img" src="../../../src/assets/img/lightning.png">
           {{dynamic.username}}
           <span>{{dynamic.rtype&&dynamic.rtype==1?'想看':'看过'}}</span>
           <span @click="jumpToDetails(dynamic.filmid,dynamic.rtype)">《{{dynamic.filminfo&&dynamic.filminfo.title}}》</span>
@@ -23,7 +23,7 @@
       </div>
       <div class="msg comment" v-if="dynamic.atype">
         <div class="comment-details">
-          <div class="user-img"></div>
+          <img class="user-img" src="../../../src/assets/img/lightning.png">
           {{dynamic.username}}
           <span>收藏了</span>
           <span class="time">{{time[index]}}</span>
@@ -119,7 +119,7 @@ export default {
         height: .4rem
         border-radius: .4rem
         margin-right: .1rem
-        background: #333
+        // background: #333
       span
         margin-left: .15rem
         color: #333
