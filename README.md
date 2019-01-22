@@ -26,3 +26,4 @@ mongoose
 :heavy_check_mark: 观影记录功能  
 :heavy_check_mark: 用户动态  
 :heavy_check_mark: 影讯评论功能  
+:heavy_check_mark: 用户动态区--观影记录评论功能  
