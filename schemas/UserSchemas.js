@@ -6,7 +6,9 @@ var UserSchema = new Schema({
 	//用户名
 	username: String,
 	//密码
-	password: String
+	password: String,
+	//打卡日期
+	checkin: Array,
 });
 
 module.exports = UserSchema;

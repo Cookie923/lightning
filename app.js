@@ -44,6 +44,8 @@ var collection = require('./routes/collection');
 var dynamic = require('./routes/dynamic');
 //引入评论模块
 var comment = require('./routes/comments');
+//引入打卡模块
+var checkin = require('./routes/checkin');
 //首页
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -83,6 +85,8 @@ app.use('/',collection);
 app.use('/',dynamic);
 //用户评论模块
 app.use('/',comment);
+//打卡模块
+app.use('/',checkin)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

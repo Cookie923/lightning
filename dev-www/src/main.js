@@ -17,7 +17,7 @@ import './assets/styles/iconfont.css'
 import 'swiper/dist/css/swiper.css'
 
 // moment.locale('zh-cn')
-// Vue.prototype.$moment = moment
+Vue.prototype.$moment = moment
 const moment = require('moment')
 require('moment/locale/zh-cn')
 

@@ -2,8 +2,6 @@
   <div class="comment-details">
     <film-header :title="title"></film-header>
     <film-text :review="commentContent"></film-text>
-    <comment-list></comment-list>
-    <film-features></film-features>
   </div>
 </template>
 
