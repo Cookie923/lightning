@@ -9,8 +9,8 @@
     ></mark-dialog>
     <header class="title">
       <span class="iconfont" @click="back()">&#xe7eb;</span>
-      <span>电影</span>
-      <el-dropdown trigger="click">
+      <!-- <span>电影</span> -->
+      <!-- <el-dropdown trigger="click">
         <span class="iconfont">&#xe632;</span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
@@ -18,7 +18,7 @@
           <el-dropdown-item>
             <i class="iconfont">&#xe655;</i>朋友圈</el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
     </header>
     <div class="film-info-box">
       <div class="film-img">

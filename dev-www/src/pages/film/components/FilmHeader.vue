@@ -2,7 +2,7 @@
   <div class="header">
     <span class="iconfont" @click="back()">&#xe7eb;</span>
     <span>{{title}}</span>
-    <el-dropdown trigger="click">
+    <!-- <el-dropdown trigger="click">
       <span class="iconfont">&#xe632;</span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>
@@ -10,7 +10,8 @@
         <el-dropdown-item>
           <i class="iconfont">&#xe655;</i>朋友圈</el-dropdown-item>
       </el-dropdown-menu>
-    </el-dropdown>
+    </el-dropdown> -->
+    <span></span>
   </div>
 </template>
 
