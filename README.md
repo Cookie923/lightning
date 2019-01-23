@@ -1,5 +1,5 @@
 # :zap:lightning
- 一个基于vue2.0的:clapper:电影web app项目
+ 一个基于vue2.0的:clapper:电影web app项目  
  项目实现用户登录注册、电影资讯、文章评论、电影搜索、电影榜单、观影记录等功能。  
  (｡･∀･)ﾉﾞ:star:chrome浏览器下运行，Galaxy S5/iphone6/7/8效果最佳  
  
