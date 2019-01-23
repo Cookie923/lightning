@@ -22,7 +22,7 @@
 + vue-lazyload  图片懒加载
 + vue-moment  时间过滤
 
-### 项目安装&运行:open_file_folder:
+### 项目安装&运行:floppy_disk:
 下载代码
 ```
 git clone https://github.com/Cookie923/lightning.git
@@ -41,7 +41,7 @@ npm run start
 ```
 请在开发者工具的移动端模式下查看效果哟！
 
-### 效果展示 
+### :tv:效果展示 
 #### 热门部分
 时光网影讯、院线热映和热门影评  
 ![热门](https://github.com/Cookie923/lightning/blob/master/screenshots/hot.gif)  
@@ -75,7 +75,7 @@ npm run start
 ![打卡](https://github.com/Cookie923/lightning/blob/master/screenshots/checkin.gif) 
 
 
-### 项目结构
+### 项目结构:open_file_folder:
 ```
 ├─bin                         // 存放启动项目的脚本文件，默认www。
 ├─config                      // 数据库MongoDB配置文件&MD5加密
@@ -111,7 +111,7 @@ npm run start
 └─app.js                      // express入口文件
 ```
 
-### 已完成功能
+### 已完成功能:clipboard:
 :heavy_check_mark: 用户登录&注册  
 :heavy_check_mark: 修改密码  
 :heavy_check_mark: 电影资讯首页轮播  
@@ -127,7 +127,7 @@ npm run start
 :heavy_check_mark: 用户动态区--观影记录评论功能  
 :heavy_check_mark: 用户打卡功能 
 
-### 遇到的一些坑
+### 遇到的一些坑:books:
 #### 老生常谈的跨域问题！
 前端需要在config目录下的index.js中进行配置proxyTable，*changeOrigin: true*这句很重要……之前忘了写这句，导致跨域问题根本没解决……
 ```
@@ -174,7 +174,7 @@ moment在vue入口文件进行配置的时候locale('zh-cn')并没有起作用�
 #### 返回的json里有标签怎么办
 在vue里直接用v-html就好了
 
-### 后记
+### :sparkles:后记
 这个项目其实是我的毕设啦，参考了很多别人做过demo（e.g.登录注册demo、使用express和mongodb实现增删改查、基于vue的豆瓣电影等等）  
 满打满算从设计思路、做原型、搭建环境、写前端页面、后端接口再到前后端联调，用了31天……中间电脑还坏了两次（p.s.使用电脑良好的习惯真重要呀…之前好多太不注意了…）还有各种拖延症……导致周期有点长。不过整体做下来还是收获颇丰的。  
-自学前端大概是在去年的三月份，六月到八月在一家公司进行前端实习，九月十月奋战秋招（不过大多都是停留在了二面……果然我还是很菜呀），十一月底开始着手做毕设，同时继续准备接下来的春招。加油吧！
+自学前端大概是在去年的三月份，六月到八月在一家公司进行前端实习，九月十月奋战秋招（不过大多都是停留在了二面……果然我还是很菜呀），十一月底开始着手做毕设，同时继续准备接下来的春招。这段时间，让我意识到做时间规划的重要性。未来还有很长的路要走，加油吧。
